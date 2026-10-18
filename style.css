@@ -33,7 +33,7 @@ body {
     transition: width 0.1s ease;
 }
 
-/* شريط التنقل */
+/* الهيدر */
 header {
     display: flex;
     justify-content: space-between;
@@ -42,7 +42,7 @@ header {
     border-bottom: 1px solid rgba(255,255,255,0.1);
     position: sticky;
     top: 0;
-    background-color: rgba(14, 9, 28, 0.9);
+    background-color: rgba(14, 9, 28, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
 }
@@ -55,6 +55,28 @@ header {
     text-decoration: none;
 }
 
+/* زر الهامبرجر (مخفي على الكمبيوتر) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* غلاف القائمة */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
 nav a {
     color: var(--text-light);
     text-decoration: none;
@@ -65,6 +87,12 @@ nav a {
 
 nav a:hover {
     color: var(--neon-lavender);
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
 .btn-primary {
@@ -573,11 +601,55 @@ footer {
     font-size: 0.9rem;
 }
 
-/* التجاوب مع الموبايل */
+/* التجاوب مع الموبايل وتنسيق القائمة الجديدة */
 @media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block; /* إظهار زر الهامبرجر */
+    }
+
+    .nav-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg);
+        flex-direction: column;
+        padding: 25px 5%;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* أنيميشن ناعم للفتح والقفل */
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.4s ease-in-out;
+    }
+
+    .nav-wrapper.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    nav a {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .header-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-actions .btn-primary {
+        width: 100%;
+    }
+
     .form-container { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.5rem; }
-    header { flex-direction: column; gap: 15px; }
 }
 
 /* =========================================

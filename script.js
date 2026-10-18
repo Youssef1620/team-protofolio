@@ -55,7 +55,7 @@ const translations = {
         "ft-p": "فريق فكرة اللي دايماً في ضهرك، بنبني واجهات تعيش وتكبر معاك.",
         "ft-h1": "فريق العمل وتواصل", "ft-h2": "روابط سريعة",
         "team-1": "يوسف احمد:", "team-2": "محمد محمود:", "team-3": "محمد طارق:", "team-4": "إبراهيم محمد:",
-        "contact-now": "تواصل الان", // دي الكلمة اللي اتضافت للينك
+        "contact-now": "تواصل الان",
         "copy": "جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio",
         "placeholder-idea": "محتاج موقع لمخبز، والزبون يلاقي المنيو في ثواني...",
         "modal-sim": "مشاريع مشابهة:", "sim-1": "تطبيق مطعم 1", "sim-2": "موقع كافيه 2", "sim-3": "منصة حجز 3", "sim-4": "لوحة تحكم 4",
@@ -121,7 +121,7 @@ const translations = {
         "ft-p": "FIKRA team has your back. Building UI that lives and grows with you.",
         "ft-h1": "Team & Contact", "ft-h2": "Quick Links",
         "team-1": "Youssef Ahmed:", "team-2": "Mohamed Mahmoud:", "team-3": "Mohamed Tarek:", "team-4": "Ibrahim Mohamed:",
-        "contact-now": "Contact Now", // الترجمة الإنجليزية
+        "contact-now": "Contact Now",
         "copy": "All Rights Reserved © 2026 - FIKRA Creative Digital Studio",
         "placeholder-idea": "Need a bakery website, customers find the menu in seconds...",
         "modal-sim": "Similar Projects:", "sim-1": "Restaurant App 1", "sim-2": "Cafe Website 2", "sim-3": "Booking Platform 3", "sim-4": "Dashboard 4",
@@ -164,6 +164,33 @@ function toggleLanguage() {
 
     if (document.getElementById('result-view').style.display === 'block') {
         generateBrief(); 
+    }
+}
+
+/* دوال قائمة الموبايل الجديدة */
+function toggleMobileMenu() {
+    const navWrapper = document.getElementById('navWrapper');
+    const icon = document.querySelector('.mobile-menu-btn i');
+    
+    navWrapper.classList.toggle('active');
+    
+    if (navWrapper.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+    } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    }
+}
+
+function closeMobileMenu() {
+    const navWrapper = document.getElementById('navWrapper');
+    const icon = document.querySelector('.mobile-menu-btn i');
+    
+    if (navWrapper.classList.contains('active')) {
+        navWrapper.classList.remove('active');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
     }
 }
 

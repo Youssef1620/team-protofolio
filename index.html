@@ -22,17 +22,27 @@
     <!-- شريط التمرير -->
     <div id="progress-bar"></div>
 
+    <!-- الهيدر الجديد المعدل للموبايل -->
     <header>
         <a href="#" class="logo-text">FIKRA</a>
-        <nav>
-            <a href="#portfolio" data-i18n="nav-portfolio">النماذج</a>
-            <a href="#features" data-i18n="nav-features">ليه إحنا؟</a>
-            <a href="#services" data-i18n="nav-services">الخدمات</a>
-            <a href="#pricing" data-i18n="nav-pricing">الباقات</a>
-        </nav>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
-            <a href="#contact" class="btn-primary" data-i18n="nav-contact">تواصل مع فكرة</a>
+        
+        <!-- زر القائمة (الهامبرجر) للموبايل -->
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- الغلاف اللي هيلم اللينكات والزراير عشان يختفي ويظهر في الموبايل -->
+        <div class="nav-wrapper" id="navWrapper">
+            <nav>
+                <a href="#portfolio" onclick="closeMobileMenu()" data-i18n="nav-portfolio">النماذج</a>
+                <a href="#features" onclick="closeMobileMenu()" data-i18n="nav-features">ليه إحنا؟</a>
+                <a href="#services" onclick="closeMobileMenu()" data-i18n="nav-services">الخدمات</a>
+                <a href="#pricing" onclick="closeMobileMenu()" data-i18n="nav-pricing">الباقات</a>
+            </nav>
+            <div class="header-actions">
+                <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <a href="#contact" class="btn-primary" onclick="closeMobileMenu()" data-i18n="nav-contact">تواصل مع فكرة</a>
+            </div>
         </div>
     </header>
 
@@ -306,12 +316,12 @@
             
             <div class="footer-col">
                 <h4 data-i18n="ft-h1">فريق العمل وتواصل</h4>
-                <div class="team-contacts">
-                    <div class="team-member"><span data-i18n="team-1">يوسف احمد:</span> <a href="tel:01558438428" data-i18n="contact-now">تواصل الان</a></div>
-                    <div class="team-member"><span data-i18n="team-2">محمد محمود:</span> <a href="tel:01117219229" data-i18n="contact-now">تواصل الان</a></div>
-                    <div class="team-member"><span data-i18n="team-3">محمد طارق:</span> <a href="tel:01095824447" data-i18n="contact-now">تواصل الان</a></div>
-                    <div class="team-member"><span data-i18n="team-4">إبراهيم محمد:</span> <a href="tel:01121726048" data-i18n="contact-now">تواصل الان</a></div>
-                </div>
+    <div class="team-contacts">
+        <div class="team-member"><span data-i18n="team-1">يوسف احمد:</span> <a href="https://wa.me/201558438428" target="_blank" data-i18n="contact-now">تواصل الان</a></div>
+        <div class="team-member"><span data-i18n="team-2">محمد محمود:</span> <a href="https://wa.me/201117219229" target="_blank" data-i18n="contact-now">تواصل الان</a></div>
+        <div class="team-member"><span data-i18n="team-3">محمد طارق:</span> <a href="https://wa.me/201095824447" target="_blank" data-i18n="contact-now">تواصل الان</a></div>
+        <div class="team-member"><span data-i18n="team-4">إبراهيم محمد:</span> <a href="https://wa.me/201121726048" target="_blank" data-i18n="contact-now">تواصل الان</a></div>
+    </div>
             </div>
 
             <div class="footer-col">
