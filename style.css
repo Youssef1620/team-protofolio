@@ -70,11 +70,13 @@ header {
     display: flex;
     align-items: center;
     gap: 30px;
+    flex: 1; /* تمت إضافته لياخد مساحة الهيدر المتبقية */
 }
 
 nav {
     display: flex;
     align-items: center;
+    margin: 0 auto; /* تمت إضافته لتوسيط الروابط بين اللوجو والزراير */
 }
 
 nav a {
@@ -631,6 +633,7 @@ footer {
         flex-direction: column;
         width: 100%;
         gap: 20px;
+        margin: 0; /* تمت إضافته لضبط المسافات في الموبايل */
     }
 
     nav a {
