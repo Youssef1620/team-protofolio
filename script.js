@@ -5,7 +5,7 @@ const translations = {
         "nav-portfolio": "النماذج", "nav-features": "ليه إحنا؟", "nav-services": "الخدمات", "nav-pricing": "الباقات", "nav-contact": "تواصل مع فكرة",
         "hero-sub": "FIKRA · WEB DESIGN · FRONT END",
         "hero-title": "فكرتك تستاهل<br>واجهة <span>توقف التمرير</span>.",
-        "hero-p2": "FIKRA هي الوسيط اللي يقربك لتفكير الزبون.", // الجملة الجديدة
+        "hero-p2": "FIKRA هي الوسيط اللي يقربك لتفكير الزبون.", 
         "hero-p": "ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.",
         "hero-btn1": "ابدأ بفكرتك", "hero-btn2": "شوف أسلوب الشغل",
         "ticker-1": "موبايل أولاً", "ticker-2": "UI / UX", "ticker-3": "من الفكرة للصفحة", "ticker-4": "FIKRA", "ticker-5": "ويب ديزاين", "ticker-6": "فرونت إند", "ticker-7": "صفحات هبوط",
@@ -54,7 +54,8 @@ const translations = {
         "btn-copy": "<i class='fa-regular fa-copy'></i> انسخ الرسالة", "btn-reset": "طلب تاني",
         "ft-p": "فريق فكرة اللي دايماً في ضهرك، بنبني واجهات تعيش وتكبر معاك.",
         "ft-h1": "فريق العمل وتواصل", "ft-h2": "روابط سريعة",
-        "team-1": "يوسف:", "team-2": "محمد:", "team-3": "محمد:", "team-4": "إبراهيم:",
+        "team-1": "يوسف احمد:", "team-2": "محمد محمود:", "team-3": "محمد طارق:", "team-4": "إبراهيم محمد:",
+        "contact-now": "تواصل الان", // دي الكلمة اللي اتضافت للينك
         "copy": "جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio",
         "placeholder-idea": "محتاج موقع لمخبز، والزبون يلاقي المنيو في ثواني...",
         "modal-sim": "مشاريع مشابهة:", "sim-1": "تطبيق مطعم 1", "sim-2": "موقع كافيه 2", "sim-3": "منصة حجز 3", "sim-4": "لوحة تحكم 4",
@@ -70,7 +71,7 @@ const translations = {
         "nav-portfolio": "Portfolio", "nav-features": "Why Us?", "nav-services": "Services", "nav-pricing": "Pricing", "nav-contact": "Contact FIKRA",
         "hero-sub": "FIKRA · WEB DESIGN · FRONT END",
         "hero-title": "Your idea deserves a<br><span>Scroll-Stopping</span> UI.",
-        "hero-p2": "FIKRA is the bridge that gets you closer to your customer's mindset.", // الترجمة الإنجليزية
+        "hero-p2": "FIKRA is the bridge that gets you closer to your customer's mindset.", 
         "hero-p": "Web Design & Front-End. We design and build: clean, fast, mobile-first pages that your customers understand instantly.",
         "hero-btn1": "Start Your Idea", "hero-btn2": "See Our Style",
         "ticker-1": "Mobile First", "ticker-2": "UI / UX", "ticker-3": "Idea to Page", "ticker-4": "FIKRA", "ticker-5": "Web Design", "ticker-6": "Front End", "ticker-7": "Landing Pages",
@@ -119,7 +120,8 @@ const translations = {
         "btn-copy": "<i class='fa-regular fa-copy'></i> Copy Message", "btn-reset": "New Request",
         "ft-p": "FIKRA team has your back. Building UI that lives and grows with you.",
         "ft-h1": "Team & Contact", "ft-h2": "Quick Links",
-        "team-1": "Youssef:", "team-2": "Mohamed:", "team-3": "Mohamed:", "team-4": "Ibrahim:",
+        "team-1": "Youssef Ahmed:", "team-2": "Mohamed Mahmoud:", "team-3": "Mohamed Tarek:", "team-4": "Ibrahim Mohamed:",
+        "contact-now": "Contact Now", // الترجمة الإنجليزية
         "copy": "All Rights Reserved © 2026 - FIKRA Creative Digital Studio",
         "placeholder-idea": "Need a bakery website, customers find the menu in seconds...",
         "modal-sim": "Similar Projects:", "sim-1": "Restaurant App 1", "sim-2": "Cafe Website 2", "sim-3": "Booking Platform 3", "sim-4": "Dashboard 4",
@@ -172,7 +174,6 @@ window.onscroll = function() {
     document.getElementById("progress-bar").style.width = scrolled + "%";
 };
 
-// الفانكشن الخاصة بمودال المشاريع (Portfolio)
 function openModal(titleKey, descKey, linkUrl) {
     document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey];
     document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey];
@@ -184,7 +185,6 @@ function closeModal() {
     document.getElementById('projectModal').style.display = 'none';
 }
 
-// الفانكشن الخاصة بمودال الباقات (Pricing)
 function openPricingModal(titleKey, descKey) {
     document.getElementById('pricingModalTitle').innerHTML = translations[currentLang][titleKey];
     document.getElementById('pricingModalDesc').innerHTML = translations[currentLang][descKey];
@@ -195,7 +195,6 @@ function closePricingModal() {
     document.getElementById('pricingModal').style.display = 'none';
 }
 
-// إغلاق أي مودال عند الضغط في المساحة الفاضية بره المربع
 window.onclick = function(event) {
     let projectModal = document.getElementById('projectModal');
     let pricingModal = document.getElementById('pricingModal');
