@@ -5,6 +5,7 @@ const translations = {
         "nav-portfolio": "النماذج", "nav-features": "ليه إحنا؟", "nav-services": "الخدمات", "nav-pricing": "الباقات", "nav-contact": "تواصل مع فكرة",
         "hero-sub": "FIKRA · WEB DESIGN · FRONT END",
         "hero-title": "فكرتك تستاهل<br>واجهة <span>توقف التمرير</span>.",
+        "hero-p2": "FIKRA هي الوسيط اللي يقربك لتفكير الزبون.", // الجملة الجديدة
         "hero-p": "ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.",
         "hero-btn1": "ابدأ بفكرتك", "hero-btn2": "شوف أسلوب الشغل",
         "ticker-1": "موبايل أولاً", "ticker-2": "UI / UX", "ticker-3": "من الفكرة للصفحة", "ticker-4": "FIKRA", "ticker-5": "ويب ديزاين", "ticker-6": "فرونت إند", "ticker-7": "صفحات هبوط",
@@ -37,7 +38,7 @@ const translations = {
         "price-c3-h": "شراكة", "price-c3-p": "لو حصل شغل شهري بعدين", "price-c3-l1": "أيام تصميم وبناء للمواقع", "price-c3-l2": "تعديل صفحات قائمة", "price-c3-l3": "تحسين مستمر", "price-c3-l4": "قناة مباشرة",
         "btn-details": "تفاصيل (About)",
         "modal-subscribe": "هل ترغب في الاشتراك الآن؟",
-        "price-desc-1": "باقة شرارة بتوفرلك البداية السريعة. هنبني اتجاه بصري وصفحة هبوط تختبر فكرتك في أسرع وقت ممكن.",
+        "price-desc-1": "باقة شرارة بتوفرلك البداية السريعة. هنبني اتجاه بصري وصفحة هبوط تلم بيها داتا العملاء وتختبر فكرتك في أسرع وقت ممكن.",
         "price-desc-2": "باقة منتج هي الأنسب لو جاهز تطلق. دراسة سريعة لجمهورك، تصميم كامل، وتكويد فرونت إند سريع وريسبونسيف على كل الشاشات.",
         "price-desc-3": "باقة شراكة بنكون فيها جزء من فريقك. تطوير وتعديل مستمر على صفحات الموقع براحة تامة وبأولوية عالية في التنفيذ.",
         "contact-h": "«الواجهة مش ديكور. دي أول جملة يقولها منتجك للزبون.»",
@@ -69,6 +70,7 @@ const translations = {
         "nav-portfolio": "Portfolio", "nav-features": "Why Us?", "nav-services": "Services", "nav-pricing": "Pricing", "nav-contact": "Contact FIKRA",
         "hero-sub": "FIKRA · WEB DESIGN · FRONT END",
         "hero-title": "Your idea deserves a<br><span>Scroll-Stopping</span> UI.",
+        "hero-p2": "FIKRA is the bridge that gets you closer to your customer's mindset.", // الترجمة الإنجليزية
         "hero-p": "Web Design & Front-End. We design and build: clean, fast, mobile-first pages that your customers understand instantly.",
         "hero-btn1": "Start Your Idea", "hero-btn2": "See Our Style",
         "ticker-1": "Mobile First", "ticker-2": "UI / UX", "ticker-3": "Idea to Page", "ticker-4": "FIKRA", "ticker-5": "Web Design", "ticker-6": "Front End", "ticker-7": "Landing Pages",
@@ -101,7 +103,7 @@ const translations = {
         "price-c3-h": "Partnership", "price-c3-p": "For ongoing monthly work", "price-c3-l1": "Design & Build Days", "price-c3-l2": "Edit Existing Pages", "price-c3-l3": "Continuous Optimization", "price-c3-l4": "Direct Channel",
         "btn-details": "Details (About)",
         "modal-subscribe": "Would you like to subscribe now?",
-        "price-desc-1": "Spark package gives you a quick start. We'll build a visual direction and a landing page to test your idea as soon as possible.",
+        "price-desc-1": "Spark package gives you a quick start. We'll build a visual direction and a landing page to collect customer data and test your idea as soon as possible.",
         "price-desc-2": "Product package is best if you're ready to launch. Quick audience study, full design, and fast, responsive front-end code for all screens.",
         "price-desc-3": "Partnership package makes us part of your team. Continuous development and edits for your website pages with high priority execution.",
         "contact-h": "«UI isn't decoration. It's your product's first sentence to the customer.»",
