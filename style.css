@@ -1,581 +1,630 @@
-
-        :root {
-            --bg-color: #0e091c;
-            --card-bg: #24153b;
-            --primary-violet: #a855f7;
-            --neon-lavender: #c084fc;
-            --text-light: #ffffff;
-            --text-muted: #a1a1aa;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-light);
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
-
-        /* شريط التمرير العلوي */
-        #progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-violet), var(--neon-lavender));
-            width: 0%;
-            z-index: 9999;
-            transition: width 0.1s ease;
-        }
-
-        /* شريط التنقل */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky;
-            top: 0;
-            background-color: rgba(14, 9, 28, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .logo-text {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--text-light);
-            text-decoration: none;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--neon-lavender);
-        }
-
-        .btn-primary {
-            background-color: var(--neon-lavender);
-            color: var(--bg-color);
-            padding: 10px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: transform 0.3s ease, box-shadow 0.3s;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4);
-        }
-
-        /* الهيرو سكشن */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-subtitle {
-            color: var(--neon-lavender);
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
-        /* الشريط المتحرك 24 ساعة */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.02);
-            padding: 20px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-        }
-
-        .ticker {
-            display: flex;
-            white-space: nowrap;
-            animation: ticker 25s linear infinite;
-        }
-
-        .ticker-item {
-            display: inline-block;
-            padding: 8px 25px;
-            margin: 0 10px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* الأقسام العامة */
-        section {
-            padding: 80px 5%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* النماذج (شغلنا) */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .portfolio-card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-violet);
-        }
-
-        .portfolio-img {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(45deg, #1a0f2e, #2a1b4e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary-violet);
-        }
-
-        .portfolio-info {
-            padding: 25px;
-        }
-
-        .portfolio-info h3 {
-            margin-bottom: 10px;
-            color: var(--neon-lavender);
-        }
-
-        .portfolio-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* ليه تختار فكرة */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--neon-lavender);
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--neon-lavender);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* الخدمات (من الرسمة للموقع) */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        .service-card {
-            background-color: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-        }
-
-        .service-card .num {
-            position: absolute;
-            top: 25px;
-            left: 25px;
-            color: var(--primary-violet);
-            font-weight: 800;
-            font-size: 1.2rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-        }
-
-        /* الباقات (الاشتراكات) */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .pricing-card {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.highlight {
-            background-color: var(--neon-lavender);
-            color: var(--bg-color);
-        }
-
-        .pricing-card.highlight p, .pricing-card.highlight li, .pricing-card.highlight h3 {
-            color: var(--bg-color);
-        }
-        
-        .badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: var(--bg-color);
-            color: var(--text-light);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .pricing-card h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .pricing-card p {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin-bottom: 40px;
-            flex-grow: 1;
-        }
-
-        .pricing-card ul li {
-            margin-bottom: 15px;
-            position: relative;
-            padding-right: 25px;
-        }
-
-        .pricing-card ul li::before {
-            content: '✓';
-            position: absolute;
-            right: 0;
-            color: inherit;
-            font-weight: bold;
-        }
-
-        .btn-block {
-            width: 100%;
-            padding: 15px;
-            border-radius: 30px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
-
-        .btn-outline {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-light);
-            transition: 0.3s;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        .pricing-card.highlight .btn-block {
-            background-color: var(--bg-color);
-            color: var(--text-light);
-        }
-
-        /* نموذج التواصل التفاعلي */
-        .form-container {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .form-info h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-        }
-
-        .form-info p {
-            color: var(--text-muted);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-light);
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: var(--bg-color);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            color: white;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--neon-lavender);
-        }
-
-        textarea.form-control {
-            height: 120px;
-            resize: none;
-        }
-
-        .result-box {
-            display: none;
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 900px;
-            margin: 0 auto;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .result-content {
-            background-color: var(--bg-color);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            font-family: monospace;
-            font-size: 16px;
-            line-height: 2;
-        }
-
-        /* نافذة العرض المنبثقة (Modal) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(14, 9, 28, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            max-width: 800px;
-            width: 100%;
-            padding: 40px;
-            position: relative;
-            border: 1px solid var(--primary-violet);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px; left: 20px;
-            background: none; border: none;
-            color: var(--text-light);
-            font-size: 24px; cursor: pointer;
-        }
-
-        /* الفوتر */
-        footer {
-            background-color: #080510;
-            padding: 60px 5% 30px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h4 {
-            color: var(--neon-lavender);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        .footer-col p {
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .footer-col a {
-            color: var(--text-muted);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-col a:hover {
-            color: var(--neon-lavender);
-        }
-
-        .team-contacts {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .team-member {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-muted);
-        }
-
-        .team-member a {
-            color: var(--primary-violet);
-            margin-bottom: 0;
-            display: inline;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background-color: var(--card-bg);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .social-icons a:hover {
-            background-color: var(--primary-violet);
-            color: white;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* التجاوب مع الموبايل */
-        @media (max-width: 768px) {
-            .form-container { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            header { flex-direction: column; gap: 15px; }
-        }
+:root {
+    --bg-color: #0e091c;
+    --card-bg: #24153b;
+    --primary-violet: #a855f7;
+    --neon-lavender: #c084fc;
+    --text-light: #ffffff;
+    --text-muted: #a1a1aa;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* شريط التمرير العلوي */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-violet), var(--neon-lavender));
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* شريط التنقل */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    background-color: rgba(14, 9, 28, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--neon-lavender);
+}
+
+.btn-primary {
+    background-color: var(--neon-lavender);
+    color: var(--bg-color);
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4);
+}
+
+/* الهيرو سكشن */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-subtitle {
+    color: var(--neon-lavender);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+/* الشريط المتحرك 24 ساعة */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+}
+
+.ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 8px 25px;
+    margin: 0 10px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+/* الأقسام العامة */
+section {
+    padding: 80px 5%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* النماذج (شغلنا) */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-card {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-violet);
+}
+
+.portfolio-img {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(45deg, #1a0f2e, #2a1b4e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary-violet);
+}
+
+.portfolio-info {
+    padding: 25px;
+}
+
+.portfolio-info h3 {
+    margin-bottom: 10px;
+    color: var(--neon-lavender);
+}
+
+.portfolio-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ليه تختار فكرة */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    border-color: var(--neon-lavender);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--neon-lavender);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* الخدمات (من الرسمة للموقع) */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+}
+
+.service-card .num {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: var(--primary-violet);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--text-light);
+}
+
+.service-card p {
+    color: var(--text-muted);
+}
+
+/* الباقات (الاشتراكات) */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.pricing-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+}
+
+.pricing-card.highlight {
+    background-color: var(--neon-lavender);
+    color: var(--bg-color);
+}
+
+.pricing-card.highlight p, .pricing-card.highlight li, .pricing-card.highlight h3 {
+    color: var(--bg-color);
+}
+
+.badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pricing-card h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.pricing-card p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.pricing-card ul {
+    list-style: none;
+    margin-bottom: 40px;
+    flex-grow: 1;
+}
+
+.pricing-card ul li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-right: 25px;
+}
+
+.pricing-card ul li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: inherit;
+    font-weight: bold;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.btn-outline {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-light);
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.pricing-card.highlight .btn-block {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+}
+
+/* نموذج التواصل التفاعلي */
+.form-container {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.form-info h3 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.form-info p {
+    color: var(--text-muted);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.form-control {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--neon-lavender);
+}
+
+textarea.form-control {
+    height: 120px;
+    resize: none;
+}
+
+.result-box {
+    display: none;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.result-content {
+    background-color: var(--bg-color);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* نافذة العرض المنبثقة (Modal) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(14, 9, 28, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    position: relative;
+    border: 1px solid var(--primary-violet);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: none; border: none;
+    color: var(--text-light);
+    font-size: 24px; cursor: pointer;
+}
+
+/* الفوتر */
+footer {
+    background-color: #080510;
+    padding: 60px 5% 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 {
+    color: var(--neon-lavender);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-col p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--neon-lavender);
+}
+
+.team-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+}
+
+.team-member a {
+    color: var(--primary-violet);
+    margin-bottom: 0;
+    display: inline;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-violet);
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* التجاوب مع الموبايل */
+@media (max-width: 768px) {
+    .form-container { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.5rem; }
+    header { flex-direction: column; gap: 15px; }
+}
+
+/* =========================================
+   تنسيقات زر تغيير اللغة ودعم الـ LTR
+   ========================================= */
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--neon-lavender);
+    color: var(--text-light);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.lang-btn:hover {
+    background: var(--neon-lavender);
+    color: var(--bg-color);
+}
+
+/* دعم اللغة الإنجليزية وتعديل الاتجاهات لليسار */
+html[dir="ltr"] {
+    text-align: left;
+}
+
+html[dir="ltr"] .pricing-card {
+    text-align: left;
+}
+
+html[dir="ltr"] .pricing-card ul li {
+    padding-right: 0;
+    padding-left: 25px;
+}
+
+html[dir="ltr"] .pricing-card ul li::before {
+    right: auto;
+    left: 0;
+}
+
+html[dir="ltr"] .service-card .num {
+    left: auto;
+    right: 25px;
+}
+
+html[dir="ltr"] .badge {
+    left: auto;
+    right: 20px;
+}

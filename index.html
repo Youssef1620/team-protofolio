@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="fikra.png">
-    <title>FIKRA - Creative Digital Studio</title>
-    <!-- أيقونة الموقع (Favicon) -->
+    <title data-i18n="page-title">FIKRA - Creative Digital Studio</title>
+    <!-- أيقونة الموقع -->
     <link rel="icon" href="329553d1-f54e-49e5-a449-7454feba8ce6_2.jpg" type="image/jpeg">
     
     <!-- خطوط جوجل (Tajawal) -->
@@ -14,7 +14,7 @@
     <!-- FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-r    <!-- ملف CSS الرئيسي -->
+    <!-- ملف CSS الرئيسي -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,84 +25,84 @@ r    <!-- ملف CSS الرئيسي -->
     <header>
         <a href="#" class="logo-text">FIKRA</a>
         <nav>
-            <a href="#portfolio">النماذج</a>
-            <a href="#features">ليه إحنا؟</a>
-            <a href="#services">الخدمات</a>
-            <a href="#pricing">الباقات</a>
+            <a href="#portfolio" data-i18n="nav-portfolio">النماذج</a>
+            <a href="#features" data-i18n="nav-features">ليه إحنا؟</a>
+            <a href="#services" data-i18n="nav-services">الخدمات</a>
+            <a href="#pricing" data-i18n="nav-pricing">الباقات</a>
         </nav>
-        <a href="#contact" class="btn-primary">تواصل مع فكرة</a>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
+            <a href="#contact" class="btn-primary" data-i18n="nav-contact">تواصل مع فكرة</a>
+        </div>
     </header>
 
     <section class="hero">
-        <span class="hero-subtitle">FIKRA · WEB DESIGN · FRONT END</span>
-        <h1>فكرتك تستاهل<br>واجهة <span>توقف التمرير</span>.</h1>
-        <p>ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.</p>
+        <span class="hero-subtitle" data-i18n="hero-sub">FIKRA · WEB DESIGN · FRONT END</span>
+        <h1 data-i18n="hero-title">فكرتك تستاهل<br>واجهة <span>توقف التمرير</span>.</h1>
+        <p data-i18n="hero-p">ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.</p>
         <div style="display: flex; justify-content: center; gap: 20px;">
-            <a href="#contact" class="btn-primary">ابدأ بفكرتك</a>
-            <a href="#portfolio" class="btn-primary" style="background: transparent; border: 1px solid var(--neon-lavender); color: var(--neon-lavender);">شوف أسلوب الشغل</a>
+            <a href="#contact" class="btn-primary" data-i18n="hero-btn1">ابدأ بفكرتك</a>
+            <a href="#portfolio" class="btn-primary" style="background: transparent; border: 1px solid var(--neon-lavender); color: var(--neon-lavender);" data-i18n="hero-btn2">شوف أسلوب الشغل</a>
         </div>
     </section>
 
     <!-- شريط الكلمات المتحرك -->
     <div class="ticker-wrap">
         <div class="ticker">
-            <div class="ticker-item">موبايل أولاً</div>
-            <div class="ticker-item">UI / UX</div>
-            <div class="ticker-item">من الفكرة للصفحة</div>
-            <div class="ticker-item">FIKRA</div>
-            <div class="ticker-item">ويب ديزاين</div>
-            <div class="ticker-item">فرونت إند</div>
-            <div class="ticker-item">صفحات هبوط</div>
-            <div class="ticker-item">موبايل أولاً</div>
-            <div class="ticker-item">UI / UX</div>
-            <div class="ticker-item">من الفكرة للصفحة</div>
-            <div class="ticker-item">FIKRA</div>
-            <div class="ticker-item">ويب ديزاين</div>
+            <div class="ticker-item" data-i18n="ticker-1">موبايل أولاً</div>
+            <div class="ticker-item" data-i18n="ticker-2">UI / UX</div>
+            <div class="ticker-item" data-i18n="ticker-3">من الفكرة للصفحة</div>
+            <div class="ticker-item" data-i18n="ticker-4">FIKRA</div>
+            <div class="ticker-item" data-i18n="ticker-5">ويب ديزاين</div>
+            <div class="ticker-item" data-i18n="ticker-6">فرونت إند</div>
+            <div class="ticker-item" data-i18n="ticker-7">صفحات هبوط</div>
+            <div class="ticker-item" data-i18n="ticker-1">موبايل أولاً</div>
+            <div class="ticker-item" data-i18n="ticker-2">UI / UX</div>
+            <div class="ticker-item" data-i18n="ticker-3">من الفكرة للصفحة</div>
+            <div class="ticker-item" data-i18n="ticker-4">FIKRA</div>
+            <div class="ticker-item" data-i18n="ticker-5">ويب ديزاين</div>
         </div>
     </div>
 
     <!-- قسم النماذج (شغلنا) -->
     <section id="portfolio">
         <div class="section-header">
-            <span class="hero-subtitle" style="margin-bottom: 10px;">SELECTED DIRECTIONS</span>
-            <h2>أسلوب الشغل، مش شعارات مستعارة.</h2>
-            <p>نماذج مواقع وواجهات. مش تطبيقات، ومش شعارات عملاء مستعارة. لما نشتغل على فكرتك، الاسم يبقى بتاعك.</p>
+            <span class="hero-subtitle" style="margin-bottom: 10px;" data-i18n="port-sub">SELECTED DIRECTIONS</span>
+            <h2 data-i18n="port-title">أسلوب الشغل، مش شعارات مستعارة.</h2>
+            <p data-i18n="port-p">نماذج مواقع وواجهات. مش تطبيقات، ومش شعارات عملاء مستعارة. لما نشتغل على فكرتك، الاسم يبقى بتاعك.</p>
         </div>
         
         <div class="portfolio-grid">
-            <!-- مشروع 1 -->
-            <div class="portfolio-card" onclick="openModal('تطبيق المطاعم السريعة', 'واجهة مصممة خصيصاً عشان تخطف عين الزبون الجعان، طلب في ثواني وتجربة مستخدم مفيش أسلس من كده.')">
+            <!-- ضفنا الرابط في الـ parameter التالت هنا -->
+            <div class="portfolio-card" onclick="openModal('modal-1-title', 'modal-1-desc', 'https://example.com/project1')">
                 <div class="portfolio-img"><i class="fa-solid fa-burger"></i></div>
                 <div class="portfolio-info">
-                    <h3>مطاعم وطلبات</h3>
-                    <p>واجهة وتجربة مستخدم (UI/UX) بتجيب من الآخر.</p>
+                    <h3 data-i18n="port-c1-h">مطاعم وطلبات</h3>
+                    <p data-i18n="port-c1-p">واجهة وتجربة مستخدم (UI/UX) بتجيب من الآخر.</p>
                 </div>
             </div>
             
-            <!-- مشروع 2 -->
-            <div class="portfolio-card" onclick="openModal('منصة الكورسات الأونلاين', 'شغلنا المنصة دي عشان الطالب يركز في المذاكرة وبس، الواجهة نظيفة ومفيهاش أي دوشة.')">
+            <div class="portfolio-card" onclick="openModal('modal-2-title', 'modal-2-desc', 'https://example.com/project2')">
                 <div class="portfolio-img"><i class="fa-solid fa-laptop-code"></i></div>
                 <div class="portfolio-info">
-                    <h3>منصة تعليمية</h3>
-                    <p>تصميم نظيف بيساعد على التركيز.</p>
+                    <h3 data-i18n="port-c2-h">منصة تعليمية</h3>
+                    <p data-i18n="port-c2-p">تصميم نظيف بيساعد على التركيز.</p>
                 </div>
             </div>
 
-            <!-- مشروع 3 -->
-            <div class="portfolio-card" onclick="openModal('متجر إلكتروني متكامل', 'المتجر ده مبني عشان يبيع. من أول لاندينج بيج لحد زرار الدفع، كل حاجة متظبطة بالملي.')">
+            <div class="portfolio-card" onclick="openModal('modal-3-title', 'modal-3-desc', 'https://example.com/project3')">
                 <div class="portfolio-img"><i class="fa-solid fa-cart-shopping"></i></div>
                 <div class="portfolio-info">
-                    <h3>إي-كوميرس</h3>
-                    <p>رحلة شراء سريعة ومفيهاش تعقيد.</p>
+                    <h3 data-i18n="port-c3-h">E-Commerce</h3>
+                    <p data-i18n="port-c3-p">رحلة شراء سريعة ومفيهاش تعقيد.</p>
                 </div>
             </div>
 
-            <!-- مشروع 4 -->
-            <div class="portfolio-card" onclick="openModal('بورتفوليو شركات', 'واجهة بتعبر عن كيان الشركة، بتدي انطباع بالثقة والاحترافية من أول سكرول.')">
+            <div class="portfolio-card" onclick="openModal('modal-4-title', 'modal-4-desc', 'https://example.com/project4')">
                 <div class="portfolio-img"><i class="fa-solid fa-building"></i></div>
                 <div class="portfolio-info">
-                    <h3>موقع شركة رسمي</h3>
-                    <p>هوية بصرية كاملة على الويب.</p>
+                    <h3 data-i18n="port-c4-h">موقع شركة رسمي</h3>
+                    <p data-i18n="port-c4-p">هوية بصرية كاملة على الويب.</p>
                 </div>
             </div>
         </div>
@@ -111,59 +111,59 @@ r    <!-- ملف CSS الرئيسي -->
     <!-- قسم ليه تختار فكرة -->
     <section id="features">
         <div class="section-header">
-            <h2>ليه تختار فكرة وتكبر دماغك؟</h2>
-            <p>إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.</p>
+            <h2 data-i18n="feat-title">ليه تختار فكرة وتكبر دماغك؟</h2>
+            <p data-i18n="feat-p">إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
                 <i class="fa-solid fa-rocket feature-icon"></i>
-                <h3>سرعة في الإنجاز</h3>
-                <p>وقتك بفلوس، وإحنا بنقدر ده جداً. شغلنا بيخلص في ميعاده ومفيش حاجة اسمها بكرة.</p>
+                <h3 data-i18n="feat-c1-h">سرعة في الإنجاز</h3>
+                <p data-i18n="feat-c1-p">وقتك بفلوس، وإحنا بنقدر ده جداً. شغلنا بيخلص في ميعاده ومفيش حاجة اسمها بكرة.</p>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-gem feature-icon"></i>
-                <h3>جودة بتنطق</h3>
-                <p>مش بنسلمك مشروع إلا لو إحنا راضيين عنه 100%، الكود نظيف والتصميم مفيش زيه.</p>
+                <h3 data-i18n="feat-c2-h">جودة بتنطق</h3>
+                <p data-i18n="feat-c2-p">مش بنسلمك مشروع إلا لو إحنا راضيين عنه 100%، الكود نظيف والتصميم مفيش زيه.</p>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-handshake feature-icon"></i>
-                <h3>إحنا شركائك</h3>
-                <p>نجاح موقعك هو نجاحنا، بنفكر معاك وبنديك الخلاصة من خبرتنا في السوق.</p>
+                <h3 data-i18n="feat-c3-h">إحنا شركائك</h3>
+                <p data-i18n="feat-c3-p">نجاح موقعك هو نجاحنا، بنفكر معاك وبنديك الخلاصة من خبرتنا في السوق.</p>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-headset feature-icon"></i>
-                <h3>التواصل معاك مستمر</h3>
-                <p>معاك على مدار الساعة.. لو قلقان من حاجة إحنا بنحلهالك في ساعتها قبل ما تستلم المشروع.</p>
+                <h3 data-i18n="feat-c4-h">التواصل معاك مستمر</h3>
+                <p data-i18n="feat-c4-p">معاك على مدار الساعة.. لو قلقان من حاجة إحنا بنحلهالك في ساعتها قبل ما تستلم المشروع بتاعك منعا للتأجيلات وتاخير الفكره.</p>
             </div>
         </div>
     </section>
 
-    <!-- قسم الخدمات (من الرسمة للموقع) -->
+    <!-- قسم الخدمات -->
     <section id="services">
         <div class="section-header">
-            <span class="hero-subtitle">WHAT WE MAKE</span>
-            <h2>من الرسمة لحد ما الموقع يفتح.</h2>
+            <span class="hero-subtitle" data-i18n="srv-sub">WHAT WE MAKE</span>
+            <h2 data-i18n="srv-title">من الرسمة لحد ما الموقع يفتح.</h2>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <div class="num">01</div>
-                <h3>تصميم واجهات المواقع</h3>
-                <p>كل شاشة ليها سبب. الشكل يتظبط على الموبايل قبل ما يتظبط على الشاشة الكبيرة.</p>
+                <h3 data-i18n="srv-c1-h">تصميم واجهات المواقع</h3>
+                <p data-i18n="srv-c1-p">كل شاشة ليها سبب. الشكل يتظبط على الموبايل قبل ما يتظبط على الشاشة الكبيرة.</p>
             </div>
             <div class="service-card">
                 <div class="num">02</div>
-                <h3>فرونت إند</h3>
-                <p>نبني الواجهة نفسها: صفحات سريعة، واضحة، ومن غير تعقيد.</p>
+                <h3 data-i18n="srv-c2-h">فرونت إند</h3>
+                <p data-i18n="srv-c2-p">نبني الواجهة نفسها: صفحات سريعة، واضحة، ومن غير تعقيد.</p>
             </div>
             <div class="service-card">
                 <div class="num">03</div>
-                <h3>صفحات بتخلّص القرار</h3>
-                <p>صفحة هبوط أو موقع كامل يخلّي الزبون يفهم ويعمل الخطوة الجاية.</p>
+                <h3 data-i18n="srv-c3-h">صفحات بتخلّص القرار</h3>
+                <p data-i18n="srv-c3-p">صفحة هبوط أو موقع كامل يخلّي الزبون يفهم ويعمل الخطوة الجاية.</p>
             </div>
             <div class="service-card">
                 <div class="num">04</div>
-                <h3>اتجاه بصري للموقع</h3>
-                <p>ألوان وخط يمشوا مع الصفحات. لو الهوية لسه مش متظبطة، نشتغل على اللي يظهر في الموقع.</p>
+                <h3 data-i18n="srv-c4-h">اتجاه بصري للموقع</h3>
+                <p data-i18n="srv-c4-p">ألوان وخط يمشوا مع الصفحات. لو الهوية لسه مش متظبطة، نشتغل على اللي يظهر في الموقع.</p>
             </div>
         </div>
     </section>
@@ -171,49 +171,47 @@ r    <!-- ملف CSS الرئيسي -->
     <!-- قسم الباقات -->
     <section id="pricing">
         <div class="section-header">
-            <span class="hero-subtitle">ENGAGEMENTS</span>
-            <h2>اختار حجم البداية.</h2>
-            <p>الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.</p>
+            <span class="hero-subtitle" data-i18n="price-sub">ENGAGEMENTS</span>
+            <h2 data-i18n="price-title">اختار حجم البداية.</h2>
+            <p data-i18n="price-p1">الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.</p>
+            <p data-i18n="price-p2">الاسعار بتتحدد في البرايفيت حسب شغلك انت , مفيش سعر ثابت انت اللي بتحدد اللي يعجبك من البدايه</p>
         </div>
         <div class="pricing-grid">
-            <!-- باقة 1 -->
             <div class="pricing-card">
-                <h3>شرارة</h3>
-                <p>لفكرة لسه بتختبر السوق</p>
+                <h3 data-i18n="price-c1-h">شرارة</h3>
+                <p data-i18n="price-c1-p">لفكرة لسه بتختبر السوق</p>
                 <ul>
-                    <li>اتجاه بصري</li>
-                    <li>صفحة هبوط</li>
-                    <li>نموذج تواصل</li>
-                    <li>حوالي أسبوعين</li>
+                    <li data-i18n="price-c1-l1">اتجاه بصري</li>
+                    <li data-i18n="price-c1-l2">صفحة هبوط</li>
+                    <li data-i18n="price-c1-l3">نموذج تواصل</li>
+                    <li data-i18n="price-c1-l4">حوالي أسبوعين</li>
                 </ul>
-                <button class="btn-block btn-outline">ابدأ بشرارة</button>
+                <button class="btn-block btn-outline" data-i18n="price-c1-btn">ابدأ بشرارة</button>
             </div>
             
-            <!-- باقة 2 (الأكثر طلباً) -->
             <div class="pricing-card highlight">
-                <div class="badge">الأكثر طلباً</div>
-                <h3>منتج</h3>
-                <p>للناس الجاهزة تطلق</p>
+                <div class="badge" data-i18n="price-badge">الأكثر طلباً</div>
+                <h3 data-i18n="price-c2-h">منتج</h3>
+                <p data-i18n="price-c2-p">للناس الجاهزة تطلق</p>
                 <ul>
-                    <li>فهم سريع للجمهور</li>
-                    <li>تصميم صفحات الموقع</li>
-                    <li>بناء الفرونت إند</li>
-                    <li>إطلاق ومتابعة أسبوع</li>
+                    <li data-i18n="price-c2-l1">فهم سريع للجمهور</li>
+                    <li data-i18n="price-c2-l2">تصميم صفحات الموقع</li>
+                    <li data-i18n="price-c2-l3">بناء الفرونت إند</li>
+                    <li data-i18n="price-c2-l4">إطلاق ومتابعة أسبوع</li>
                 </ul>
-                <button class="btn-block">ابدأ بمنتج</button>
+                <button class="btn-block" data-i18n="price-c2-btn">ابدأ بمنتج</button>
             </div>
 
-            <!-- باقة 3 -->
             <div class="pricing-card">
-                <h3>شراكة</h3>
-                <p>لو حصل شغل شهري بعدين</p>
+                <h3 data-i18n="price-c3-h">شراكة</h3>
+                <p data-i18n="price-c3-p">لو حصل شغل شهري بعدين</p>
                 <ul>
-                    <li>أيام تصميم وبناء للمواقع</li>
-                    <li>تعديل صفحات قائمة</li>
-                    <li>تحسين مستمر</li>
-                    <li>قناة مباشرة</li>
+                    <li data-i18n="price-c3-l1">أيام تصميم وبناء للمواقع</li>
+                    <li data-i18n="price-c3-l2">تعديل صفحات قائمة</li>
+                    <li data-i18n="price-c3-l3">تحسين مستمر</li>
+                    <li data-i18n="price-c3-l4">قناة مباشرة</li>
                 </ul>
-                <button class="btn-block btn-outline">ابدأ بشراكة</button>
+                <button class="btn-block btn-outline" data-i18n="price-c3-btn">ابدأ بشراكة</button>
             </div>
         </div>
     </section>
@@ -221,66 +219,63 @@ r    <!-- ملف CSS الرئيسي -->
     <!-- نموذج التواصل -->
     <section id="contact">
         <div class="section-header">
-            <h2>«الواجهة مش ديكور. دي أول جملة يقولها منتجك للزبون.»</h2>
-            <p>فكرة. ويب ديزاين وفرونت إند. بنفضل لحد ما شكل الموقع يقفل.</p>
+            <h2 data-i18n="contact-h">«الواجهة مش ديكور. دي أول جملة يقولها منتجك للزبون.»</h2>
+            <p data-i18n="contact-p">فكرة. ويب ديزاين وفرونت إند. بنفضل لحد ما شكل الموقع يقفل.</p>
         </div>
         
         <div id="form-view" class="form-container">
             <div class="form-info">
-                <span class="hero-subtitle">START HERE</span>
-                <h3>ابعت الفكرة زي ما هي.</h3>
-                <p>مش محتاج عرض تقديمي. اسمك، طريقة نكلمك بيها، وسطرين عن اللي نفسك الزبون يحس بيه.</p>
-                <p style="margin-top: 20px; font-size: 14px;">الرد خلال يوم عمل. الطاقة الحالية: مشروعان.</p>
+                <span class="hero-subtitle" data-i18n="form-sub">START HERE</span>
+                <h3 data-i18n="form-h">ابعت الفكرة زي ما هي.</h3>
+                <p data-i18n="form-p1">مش محتاج عرض تقديمي. اسمك، طريقة نكلمك بيها، وسطرين عن اللي نفسك الزبون يحس بيه.</p>
+                <p style="margin-top: 20px; font-size: 14px;" data-i18n="form-p2">الرد خلال يوم عمل. الطاقة الحالية للاسف : مشروعان في الشهر فقط وبنعرفك في البرايفت احنا هنبدء شغلك امتي .</p>
             </div>
             <div class="form-inputs">
                 <div class="form-group">
-                    <label>الاسم</label>
+                    <label data-i18n="lbl-name">الاسم</label>
                     <input type="text" id="userName" class="form-control">
                 </div>
                 <div style="display: flex; gap: 15px;">
                     <div class="form-group" style="flex: 1;">
-                        <label>نوع الشغل</label>
+                        <label data-i18n="lbl-type">نوع الشغل</label>
                         <select id="workType" class="form-control">
-                            <option>موقع كامل</option>
-                            <option>صفحة هبوط</option>
-                            <option>تصميم واجهة فقط</option>
+                            <option value="full" data-i18n="opt-1">موقع كامل</option>
+                            <option value="landing" data-i18n="opt-2">صفحة هبوط</option>
+                            <option value="ui" data-i18n="opt-3">تصميم واجهة فقط</option>
                         </select>
                     </div>
                     <div class="form-group" style="flex: 1;">
-                        <label>إيميل أو تليفون</label>
+                        <label data-i18n="lbl-contact">إيميل أو تليفون</label>
                         <input type="text" id="userContact" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>الفكرة</label>
-                    <textarea id="userIdea" class="form-control" placeholder="محتاج موقع لمخبز، والزبون يلاقي المنيو في ثواني..."></textarea>
+                    <label data-i18n="lbl-idea">الفكرة</label>
+                    <textarea id="userIdea" class="form-control" data-i18n-placeholder="placeholder-idea" placeholder="محتاج موقع لمخبز، والزبون يلاقي المنيو في ثواني..."></textarea>
                 </div>
-                <button class="btn-primary" style="width: 100%;" onclick="generateBrief()">جهّز الطلب</button>
+                <button class="btn-primary" style="width: 100%;" onclick="generateBrief()" data-i18n="btn-submit">جهّز الطلب</button>
             </div>
         </div>
 
-        <!-- واجهة النتيجة بعد ملء النموذج -->
         <div id="result-view" class="result-box">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">
                 <div style="flex: 1;">
-                    <span class="hero-subtitle">RECEIVED</span>
-                    <h3 style="font-size: 2rem; margin-bottom: 10px;">جهّزنا طلبك، <span id="displayName"></span>.</h3>
-                    <p style="color: var(--text-muted);">انسخ الملخص وابعته لفريق فكرة على الإيميل أو الواتساب. هنرد خلال يوم عمل.</p>
+                    <span class="hero-subtitle" data-i18n="res-sub">RECEIVED</span>
+                    <h3 style="font-size: 2rem; margin-bottom: 10px;" id="res-h-wrapper">جهّزنا طلبك، <span id="displayName"></span>.</h3>
+                    <p style="color: var(--text-muted);" data-i18n="res-p">انسخ الملخص وابعته لفريق فكرة على الإيميل أو الواتساب. هنرد خلال يوم عمل.</p>
                     
-                    <div class="result-content" id="finalText">
-                        <!-- النص هيتولد هنا عن طريق الجافاسكريبت -->
-                    </div>
+                    <div class="result-content" id="finalText"></div>
                     
                     <div style="display: flex; gap: 15px;">
-                        <button class="btn-primary" onclick="copyBrief()"><i class="fa-regular fa-copy"></i> انسخ الرسالة</button>
-                        <button class="btn-outline btn-block" style="width: auto; padding: 10px 20px;" onclick="resetForm()">طلب تاني</button>
+                        <button class="btn-primary" onclick="copyBrief()" data-i18n="btn-copy"><i class="fa-regular fa-copy"></i> انسخ الرسالة</button>
+                        <button class="btn-outline btn-block" style="width: auto; padding: 10px 20px;" onclick="resetForm()" data-i18n="btn-reset">طلب تاني</button>
                     </div>
                 </div>
                 
                 <div style="flex: 1;">
-                    <span class="hero-subtitle">START HERE</span>
-                    <h3 style="font-size: 2rem; margin-bottom: 20px;">ابعت الفكرة زي ما هي.</h3>
-                    <p style="color: var(--text-muted);">مش محتاج عرض تقديمي. اسمك، طريقة نكلمك بيها، وسطرين عن اللي نفسك الزبون يحس بيه.</p>
+                    <span class="hero-subtitle" data-i18n="form-sub">START HERE</span>
+                    <h3 style="font-size: 2rem; margin-bottom: 20px;" data-i18n="form-h">ابعت الفكرة زي ما هي.</h3>
+                    <p style="color: var(--text-muted);" data-i18n="form-p1">مش محتاج عرض تقديمي. اسمك، طريقة نكلمك بيها، وسطرين عن اللي نفسك الزبون يحس بيه.</p>
                 </div>
             </div>
         </div>
@@ -291,7 +286,7 @@ r    <!-- ملف CSS الرئيسي -->
         <div class="footer-grid">
             <div class="footer-col">
                 <a href="#" class="logo-text" style="font-size: 24px; margin-bottom: 15px; display: block;">FIKRA</a>
-                <p>فريق فكرة اللي دايماً في ضهرك، بنبني واجهات تعيش وتكبر معاك.</p>
+                <p data-i18n="ft-p">فريق فكرة اللي دايماً في ضهرك، بنبني واجهات تعيش وتكبر معاك.</p>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -300,41 +295,44 @@ r    <!-- ملف CSS الرئيسي -->
             </div>
             
             <div class="footer-col">
-                <h4>فريق العمل وتواصل</h4>
+                <h4 data-i18n="ft-h1">فريق العمل وتواصل</h4>
                 <div class="team-contacts">
-                    <div class="team-member">يوسف: <a href="#">#</a></div>
-                    <div class="team-member">محمد: <a href="#">#</a></div>
-                    <div class="team-member">محمد: <a href="#">#</a></div>
-                    <div class="team-member">إبراهيم: <a href="#">#</a></div>
+                    <div class="team-member"><span data-i18n="team-1">يوسف:</span> <a href="#">#</a></div>
+                    <div class="team-member"><span data-i18n="team-2">محمد:</span> <a href="#">#</a></div>
+                    <div class="team-member"><span data-i18n="team-3">محمد:</span> <a href="#">#</a></div>
+                    <div class="team-member"><span data-i18n="team-4">إبراهيم:</span> <a href="#">#</a></div>
                 </div>
             </div>
 
             <div class="footer-col">
-                <h4>روابط سريعة</h4>
-                <a href="#portfolio">أعمالنا</a>
-                <a href="#services">خدماتنا</a>
-                <a href="#pricing">الباقات</a>
-                <a href="#contact">تواصل معنا</a>
+                <h4 data-i18n="ft-h2">روابط سريعة</h4>
+                <a href="#portfolio" data-i18n="nav-portfolio">أعمالنا</a>
+                <a href="#services" data-i18n="nav-services">خدماتنا</a>
+                <a href="#pricing" data-i18n="nav-pricing">الباقات</a>
+                <a href="#contact" data-i18n="nav-contact">تواصل معنا</a>
             </div>
         </div>
         <div class="copyright">
-            <p>جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio</p>
+            <p data-i18n="copy">جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio</p>
         </div>
     </footer>
 
-    <!-- واجهة المودال (نافذة عرض تفاصيل المشروع) -->
+    <!-- المودال -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 id="modalTitle" style="color: var(--neon-lavender); margin-bottom: 15px;"></h2>
-            <p id="modalDesc" style="font-size: 1.1rem; margin-bottom: 30px;"></p>
+            <p id="modalDesc" style="font-size: 1.1rem; margin-bottom: 20px;"></p>
             
-            <h4 style="margin-bottom: 15px; color: var(--text-muted);">مشاريع مشابهة:</h4>
+            <!-- الزرار الجديد لرابط المشروع -->
+            <a href="#" id="modalLink" target="_blank" class="btn-primary" style="display: inline-block; margin-bottom: 30px;" data-i18n="modal-link-btn">رابط المشروع مباشرة</a>
+            
+            <h4 style="margin-bottom: 15px; color: var(--text-muted);" data-i18n="modal-sim">مشاريع مشابهة:</h4>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;">تطبيق مطعم 1</span>
-                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;">موقع كافيه 2</span>
-                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;">منصة حجز 3</span>
-                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;">لوحة تحكم 4</span>
+                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;" data-i18n="sim-1">تطبيق مطعم 1</span>
+                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;" data-i18n="sim-2">موقع كافيه 2</span>
+                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;" data-i18n="sim-3">منصة حجز 3</span>
+                <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;" data-i18n="sim-4">لوحة تحكم 4</span>
             </div>
         </div>
     </div>
