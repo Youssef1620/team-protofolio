@@ -73,7 +73,6 @@
         </div>
         
         <div class="portfolio-grid">
-            <!-- ضفنا الرابط في الـ parameter التالت هنا -->
             <div class="portfolio-card" onclick="openModal('modal-1-title', 'modal-1-desc', 'https://example.com/project1')">
                 <div class="portfolio-img"><i class="fa-solid fa-burger"></i></div>
                 <div class="portfolio-info">
@@ -103,6 +102,15 @@
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c4-h">موقع شركة رسمي</h3>
                     <p data-i18n="port-c4-p">هوية بصرية كاملة على الويب.</p>
+                </div>
+            </div>
+
+            <!-- الكارت الخامس المضاف حديثاً: لوحة التحكم -->
+            <div class="portfolio-card" onclick="openModal('modal-5-title', 'modal-5-desc', 'https://example.com/project5')">
+                <div class="portfolio-img"><i class="fa-solid fa-chart-pie"></i></div>
+                <div class="portfolio-info">
+                    <h3 data-i18n="port-c5-h">لوحة تحكم (Dashboard)</h3>
+                    <p data-i18n="port-c5-p">صفحة تحكم ستاتيكية لعرض البيانات بوضوح.</p>
                 </div>
             </div>
         </div>
@@ -179,14 +187,15 @@
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3 data-i18n="price-c1-h">شرارة</h3>
-                <p data-i18n="price-c1-p">لفكرة لسه بتختبر السوق</p>
+                <p data-i18n="price-c1-p">الفكرة لسه بتختبر السوق</p>
                 <ul>
                     <li data-i18n="price-c1-l1">اتجاه بصري</li>
                     <li data-i18n="price-c1-l2">صفحة هبوط</li>
                     <li data-i18n="price-c1-l3">نموذج تواصل</li>
                     <li data-i18n="price-c1-l4">حوالي أسبوعين</li>
                 </ul>
-                <button class="btn-block btn-outline" data-i18n="price-c1-btn">ابدأ بشرارة</button>
+                <!-- تم استبدال الزرار بزرار التفاصيل فقط -->
+                <button class="btn-block btn-outline" onclick="openPricingModal('price-c1-h', 'price-desc-1')" data-i18n="btn-details">تفاصيل </button>
             </div>
             
             <div class="pricing-card highlight">
@@ -199,7 +208,7 @@
                     <li data-i18n="price-c2-l3">بناء الفرونت إند</li>
                     <li data-i18n="price-c2-l4">إطلاق ومتابعة أسبوع</li>
                 </ul>
-                <button class="btn-block" data-i18n="price-c2-btn">ابدأ بمنتج</button>
+                <button class="btn-block" onclick="openPricingModal('price-c2-h', 'price-desc-2')" data-i18n="btn-details" style="background-color: var(--bg-color); color: var(--text-light);">تفاصيل </button>
             </div>
 
             <div class="pricing-card">
@@ -211,7 +220,7 @@
                     <li data-i18n="price-c3-l3">تحسين مستمر</li>
                     <li data-i18n="price-c3-l4">قناة مباشرة</li>
                 </ul>
-                <button class="btn-block btn-outline" data-i18n="price-c3-btn">ابدأ بشراكة</button>
+                <button class="btn-block btn-outline" onclick="openPricingModal('price-c3-h', 'price-desc-3')" data-i18n="btn-details">تفاصيل </button>
             </div>
         </div>
     </section>
@@ -317,14 +326,13 @@
         </div>
     </footer>
 
-    <!-- المودال -->
+    <!-- المودال الخاص بالمشاريع -->
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 id="modalTitle" style="color: var(--neon-lavender); margin-bottom: 15px;"></h2>
             <p id="modalDesc" style="font-size: 1.1rem; margin-bottom: 20px;"></p>
             
-            <!-- الزرار الجديد لرابط المشروع -->
             <a href="#" id="modalLink" target="_blank" class="btn-primary" style="display: inline-block; margin-bottom: 30px;" data-i18n="modal-link-btn">رابط المشروع مباشرة</a>
             
             <h4 style="margin-bottom: 15px; color: var(--text-muted);" data-i18n="modal-sim">مشاريع مشابهة:</h4>
@@ -336,6 +344,21 @@
             </div>
         </div>
     </div>
+
+    <!-- المودال الجديد الخاص بتفاصيل الباقات والاشتراك -->
+    <div id="pricingModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: center;">
+            <button class="close-btn" onclick="closePricingModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 id="pricingModalTitle" style="color: var(--neon-lavender); margin-bottom: 20px; font-size: 2rem;"></h2>
+            <p id="pricingModalDesc" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 30px;"></p>
+            
+            <!-- زرار الاشتراك اللي بينزل على Start Here -->
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
+                <a href="#contact" onclick="closePricingModal()" class="btn-primary" style="display: block; width: 100%; font-size: 1.1rem;" data-i18n="modal-subscribe">هل ترغب في الاشتراك الآن؟</a>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -78,6 +78,7 @@ nav a:hover {
     border: none;
     cursor: pointer;
     display: inline-block;
+    text-align: center;
 }
 
 .btn-primary:hover {

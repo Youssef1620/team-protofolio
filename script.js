@@ -15,6 +15,7 @@ const translations = {
         "port-c2-h": "منصة تعليمية", "port-c2-p": "تصميم نظيف بيساعد على التركيز.",
         "port-c3-h": "E-Commerce", "port-c3-p": "رحلة شراء سريعة ومفيهاش تعقيد.",
         "port-c4-h": "موقع شركة رسمي", "port-c4-p": "هوية بصرية كاملة على الويب.",
+        "port-c5-h": "لوحة تحكم (Dashboard)", "port-c5-p": "صفحة تحكم ستاتيكية لعرض البيانات بوضوح.",
         "feat-title": "ليه تختار فكرة وتكبر دماغك؟",
         "feat-p": "إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.",
         "feat-c1-h": "سرعة في الإنجاز", "feat-c1-p": "وقتك بفلوس، وإحنا بنقدر ده جداً. شغلنا بيخلص في ميعاده ومفيش حاجة اسمها بكرة.",
@@ -30,10 +31,15 @@ const translations = {
         "price-sub": "ENGAGEMENTS", "price-title": "اختار حجم البداية.",
         "price-p1": "الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.",
         "price-p2": "الاسعار بتتحدد في البرايفيت حسب شغلك انت , مفيش سعر ثابت انت اللي بتحدد اللي يعجبك من البدايه",
-        "price-c1-h": "شرارة", "price-c1-p": "لفكرة لسه بتختبر السوق", "price-c1-l1": "اتجاه بصري", "price-c1-l2": "صفحة هبوط", "price-c1-l3": "نموذج تواصل", "price-c1-l4": "حوالي أسبوعين", "price-c1-btn": "ابدأ بشرارة",
+        "price-c1-h": "شرارة", "price-c1-p": "لفكرة لسه بتختبر السوق", "price-c1-l1": "اتجاه بصري", "price-c1-l2": "صفحة هبوط", "price-c1-l3": "نموذج تواصل", "price-c1-l4": "حوالي أسبوعين",
         "price-badge": "الأكثر طلباً",
-        "price-c2-h": "منتج", "price-c2-p": "للناس الجاهزة تطلق", "price-c2-l1": "فهم سريع للجمهور", "price-c2-l2": "تصميم صفحات الموقع", "price-c2-l3": "بناء الفرونت إند", "price-c2-l4": "إطلاق ومتابعة أسبوع", "price-c2-btn": "ابدأ بمنتج",
-        "price-c3-h": "شراكة", "price-c3-p": "لو حصل شغل شهري بعدين", "price-c3-l1": "أيام تصميم وبناء للمواقع", "price-c3-l2": "تعديل صفحات قائمة", "price-c3-l3": "تحسين مستمر", "price-c3-l4": "قناة مباشرة", "price-c3-btn": "ابدأ بشراكة",
+        "price-c2-h": "منتج", "price-c2-p": "للناس الجاهزة تطلق", "price-c2-l1": "فهم سريع للجمهور", "price-c2-l2": "تصميم صفحات الموقع", "price-c2-l3": "بناء الفرونت إند", "price-c2-l4": "إطلاق ومتابعة أسبوع",
+        "price-c3-h": "شراكة", "price-c3-p": "لو حصل شغل شهري بعدين", "price-c3-l1": "أيام تصميم وبناء للمواقع", "price-c3-l2": "تعديل صفحات قائمة", "price-c3-l3": "تحسين مستمر", "price-c3-l4": "قناة مباشرة",
+        "btn-details": "تفاصيل (About)",
+        "modal-subscribe": "هل ترغب في الاشتراك الآن؟",
+        "price-desc-1": "باقة شرارة بتوفرلك البداية السريعة. هنبني اتجاه بصري وصفحة هبوط تختبر فكرتك في أسرع وقت ممكن.",
+        "price-desc-2": "باقة منتج هي الأنسب لو جاهز تطلق. دراسة سريعة لجمهورك، تصميم كامل، وتكويد فرونت إند سريع وريسبونسيف على كل الشاشات.",
+        "price-desc-3": "باقة شراكة بنكون فيها جزء من فريقك. تطوير وتعديل مستمر على صفحات الموقع براحة تامة وبأولوية عالية في التنفيذ.",
         "contact-h": "«الواجهة مش ديكور. دي أول جملة يقولها منتجك للزبون.»",
         "contact-p": "فكرة. ويب ديزاين وفرونت إند. بنفضل لحد ما شكل الموقع يقفل.",
         "form-sub": "START HERE", "form-h": "ابعت الفكرة زي ما هي.",
@@ -55,6 +61,7 @@ const translations = {
         "modal-2-title": "منصة الكورسات الأونلاين", "modal-2-desc": "شغلنا المنصة دي عشان الطالب يركز في المذاكرة وبس، الواجهة نظيفة ومفيهاش أي دوشة.",
         "modal-3-title": "متجر إلكتروني متكامل", "modal-3-desc": "المتجر ده مبني عشان يبيع. من أول لاندينج بيج لحد زرار الدفع، كل حاجة متظبطة بالملي.",
         "modal-4-title": "بورتفوليو شركات", "modal-4-desc": "واجهة بتعبر عن كيان الشركة، بتدي انطباع بالثقة والاحترافية من أول سكرول.",
+        "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.",
         "modal-link-btn": "رابط المشروع مباشرة"
     },
     en: {
@@ -72,6 +79,7 @@ const translations = {
         "port-c2-h": "E-Learning Platform", "port-c2-p": "Clean design built to help students focus without distractions.",
         "port-c3-h": "E-Commerce", "port-c3-p": "Built to sell. A seamless buying journey from landing page to checkout.",
         "port-c4-h": "Corporate Portfolio", "port-c4-p": "A visual identity that reflects trust and professionalism from the first scroll.",
+        "port-c5-h": "Dashboard", "port-c5-p": "Static dashboard page for clear data visualization.",
         "feat-title": "Why Choose FIKRA & Relax?",
         "feat-p": "We don't just do regular work; we build websites that live and grow your business.",
         "feat-c1-h": "Fast Execution", "feat-c1-p": "Your time is money. We deliver on time, no excuses.",
@@ -87,10 +95,15 @@ const translations = {
         "price-sub": "ENGAGEMENTS", "price-title": "Choose Your Scale.",
         "price-p1": "Currently taking freelance projects. Packages are for scale reference, pricing is custom after hearing your idea.",
         "price-p2": "Prices are discussed privately. There's no fixed price; you decide what suits you from the start.",
-        "price-c1-h": "Spark", "price-c1-p": "For ideas testing the market", "price-c1-l1": "Visual Direction", "price-c1-l2": "Landing Page", "price-c1-l3": "Contact Form", "price-c1-l4": "Around 2 Weeks", "price-c1-btn": "Start with Spark",
+        "price-c1-h": "Spark", "price-c1-p": "For ideas testing the market", "price-c1-l1": "Visual Direction", "price-c1-l2": "Landing Page", "price-c1-l3": "Contact Form", "price-c1-l4": "Around 2 Weeks",
         "price-badge": "Most Popular",
-        "price-c2-h": "Product", "price-c2-p": "Ready to launch", "price-c2-l1": "Quick Audience Insight", "price-c2-l2": "Full Site UI Design", "price-c2-l3": "Front-End Build", "price-c2-l4": "Launch & 1W Support", "price-c2-btn": "Start with Product",
-        "price-c3-h": "Partnership", "price-c3-p": "For ongoing monthly work", "price-c3-l1": "Design & Build Days", "price-c3-l2": "Edit Existing Pages", "price-c3-l3": "Continuous Optimization", "price-c3-l4": "Direct Channel", "price-c3-btn": "Start with Partnership",
+        "price-c2-h": "Product", "price-c2-p": "Ready to launch", "price-c2-l1": "Quick Audience Insight", "price-c2-l2": "Full Site UI Design", "price-c2-l3": "Front-End Build", "price-c2-l4": "Launch & 1W Support",
+        "price-c3-h": "Partnership", "price-c3-p": "For ongoing monthly work", "price-c3-l1": "Design & Build Days", "price-c3-l2": "Edit Existing Pages", "price-c3-l3": "Continuous Optimization", "price-c3-l4": "Direct Channel",
+        "btn-details": "Details (About)",
+        "modal-subscribe": "Would you like to subscribe now?",
+        "price-desc-1": "Spark package gives you a quick start. We'll build a visual direction and a landing page to test your idea as soon as possible.",
+        "price-desc-2": "Product package is best if you're ready to launch. Quick audience study, full design, and fast, responsive front-end code for all screens.",
+        "price-desc-3": "Partnership package makes us part of your team. Continuous development and edits for your website pages with high priority execution.",
         "contact-h": "«UI isn't decoration. It's your product's first sentence to the customer.»",
         "contact-p": "FIKRA. Web Design & Front-End. We stay until it's perfect.",
         "form-sub": "START HERE", "form-h": "Send Your Idea As Is.",
@@ -112,6 +125,7 @@ const translations = {
         "modal-2-title": "E-Learning Platform", "modal-2-desc": "We built this platform so students can focus only on studying. Clean UI with zero noise.",
         "modal-3-title": "Full E-Commerce Store", "modal-3-desc": "This store is built to sell. From the landing page to the checkout button, everything is pixel-perfect.",
         "modal-4-title": "Corporate Portfolio", "modal-4-desc": "A UI that expresses the company's entity, giving an impression of trust and professionalism from the first scroll.",
+        "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read, suitable for platforms requiring continuous monitoring.",
         "modal-link-btn": "Live Project Demo"
     }
 };
@@ -156,13 +170,11 @@ window.onscroll = function() {
     document.getElementById("progress-bar").style.width = scrolled + "%";
 };
 
-// الفانكشن اتعدلت عشان تقبل الرابط
+// الفانكشن الخاصة بمودال المشاريع (Portfolio)
 function openModal(titleKey, descKey, linkUrl) {
     document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey];
     document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey];
-    
     document.getElementById('modalLink').href = linkUrl;
-    
     document.getElementById('projectModal').style.display = 'flex';
 }
 
@@ -170,10 +182,26 @@ function closeModal() {
     document.getElementById('projectModal').style.display = 'none';
 }
 
+// الفانكشن الخاصة بمودال الباقات (Pricing)
+function openPricingModal(titleKey, descKey) {
+    document.getElementById('pricingModalTitle').innerHTML = translations[currentLang][titleKey];
+    document.getElementById('pricingModalDesc').innerHTML = translations[currentLang][descKey];
+    document.getElementById('pricingModal').style.display = 'flex';
+}
+
+function closePricingModal() {
+    document.getElementById('pricingModal').style.display = 'none';
+}
+
+// إغلاق أي مودال عند الضغط في المساحة الفاضية بره المربع
 window.onclick = function(event) {
-    let modal = document.getElementById('projectModal');
-    if (event.target == modal) {
-        modal.style.display = "none";
+    let projectModal = document.getElementById('projectModal');
+    let pricingModal = document.getElementById('pricingModal');
+    if (event.target == projectModal) {
+        projectModal.style.display = "none";
+    }
+    if (event.target == pricingModal) {
+        pricingModal.style.display = "none";
     }
 }
 
