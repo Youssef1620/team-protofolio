@@ -63,8 +63,9 @@ const translations = {
         "modal-2-title": "منصة الكورسات الأونلاين", "modal-2-desc": "شغلنا المنصة دي عشان الطالب يركز في المذاكرة وبس، الواجهة نظيفة ومفيهاش أي دوشة.",
         "modal-3-title": "متجر إلكتروني متكامل", "modal-3-desc": "المتجر ده مبني عشان يبيع. من أول لاندينج بيج لحد زرار الدفع، كل حاجة متظبطة بالملي.",
         "modal-4-title": "بورتفوليو شركات", "modal-4-desc": "واجهة بتعبر عن كيان الشركة، بتدي انطباع بالثقة والاحترافية من أول سكرول.",
-        "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.",
-        "modal-link-btn": "رابط المشروع مباشرة"
+        "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.<br><br><strong>تحديث 1.2:</strong><br>• تم تعديل بعض النصوص الغير مطابقة للغة المستخدمة في الواجهة<br>• تم تحسين الـ AI وتطويره وتحسين جودة المايك بشكل ملحوظ ومدته في السماع<br>• هناك تحسينات أخرى ملحوظة عن التحديث رقم 1.1<br>• <em>(ملحوظة)</em> يجب استخراج API من Google Studio لاستخدام الـ AI",
+        "modal-link-btn": "رابط المشروع مباشرة",
+        "modal-version": "الإصدار 1.2"
     },
     en: {
         "page-title": "FIKRA - Creative Digital Studio",
@@ -129,8 +130,9 @@ const translations = {
         "modal-2-title": "E-Learning Platform", "modal-2-desc": "We built this platform so students can focus only on studying. Clean UI with zero noise.",
         "modal-3-title": "Full E-Commerce Store", "modal-3-desc": "This store is built to sell. From the landing page to the checkout button, everything is pixel-perfect.",
         "modal-4-title": "Corporate Portfolio", "modal-4-desc": "A UI that expresses the company's entity, giving an impression of trust and professionalism from the first scroll.",
-        "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read, suitable for platforms requiring continuous monitoring.",
-        "modal-link-btn": "Live Project Demo"
+        "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read, suitable for platforms requiring continuous monitoring.<br><br><strong>Update 1.2:</strong><br>• Fixed some texts that didn't match the language used in the interface<br>• Improved the AI, developed it, and significantly enhanced the microphone quality and listening duration<br>• There are other notable improvements over update 1.1<br>• <em>(Note)</em> You must extract the API from Google Studio to use the AI",
+        "modal-link-btn": "Live Project Demo",
+        "modal-version": "Version 1.2"
     }
 };
 
@@ -205,6 +207,19 @@ function openModal(titleKey, descKey, linkUrl) {
     document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey];
     document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey];
     document.getElementById('modalLink').href = linkUrl;
+
+    // إظهار الإصدار 1.2 تحت الرابط المباشر لمشروع الـ Dashboard فقط
+    const versionEl = document.getElementById('modalVersion');
+    if (versionEl) {
+        if (linkUrl && linkUrl.includes('personal-university')) {
+            versionEl.innerHTML = translations[currentLang]['modal-version'] || 'Version 1.2';
+            versionEl.style.display = 'block';
+        } else {
+            versionEl.innerHTML = '';
+            versionEl.style.display = 'none';
+        }
+    }
+
     document.getElementById('projectModal').style.display = 'flex';
 }
 
