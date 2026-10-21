@@ -32,10 +32,10 @@ window.autoTrans = async function(sourceId, targetId) {
         if(data && data.responseData && data.responseData.translatedText) {
             target.value = data.responseData.translatedText;
         } else {
-            target.value = text; // Fallback
+            target.value = text;
         }
     } catch(e) {
-        target.value = text; // Fallback
+        target.value = text;
         console.error("Translation Error: ", e);
     }
 };
@@ -77,6 +77,43 @@ window.logoutAdmin = async function () {
   } catch (err) { alert("حصل خطأ أثناء الخروج"); }
 };
 
+// Switch between Create and Edit modes
+window.switchAdminMode = function(mode) {
+    const createContainer = document.getElementById('create-mode-container');
+    const editContainer = document.getElementById('edit-mode-container');
+    const createBtn = document.getElementById('modeCreateBtn');
+    const editBtn = document.getElementById('modeEditBtn');
+
+    document.querySelectorAll(".admin-tab-content").forEach((el) => el.style.display = "none");
+
+    if(mode === 'create') {
+        createContainer.style.display = 'block';
+        editContainer.style.display = 'none';
+        
+        createBtn.className = 'btn-primary';
+        createBtn.style.border = 'none';
+        
+        editBtn.className = 'btn-outline';
+        editBtn.style.border = '1px solid var(--neon-lavender)';
+        editBtn.style.color = 'white';
+
+        window.showAdminTab('tab-new-card'); // default create
+    } else {
+        createContainer.style.display = 'none';
+        editContainer.style.display = 'block';
+        
+        createBtn.className = 'btn-outline';
+        createBtn.style.border = '1px solid var(--neon-lavender)';
+        createBtn.style.color = 'white';
+        
+        editBtn.className = 'btn-primary';
+        editBtn.style.border = 'none';
+        
+        window.populateEditDropdowns();
+        window.showAdminTab('tab-links'); // default edit
+    }
+};
+
 window.forceBindButtons = function () {
   const loginBtn = document.getElementById("adminLoginBtn");
   if (loginBtn) {
@@ -105,7 +142,6 @@ window.forceBindButtons = function () {
   bindClick("addTickerBtn", window.addTickerItem);
   bindClick("addCardBtn", window.addNewPortfolioCard);
   
-  // New buttons
   bindClick("addFeatureBtn", window.addCustomFeature);
   bindClick("addServiceBtn", window.addCustomService);
   bindClick("addPackageBtn", window.addCustomPackage);
@@ -153,6 +189,96 @@ window.showAdminTab = function (tabId) {
   if (activeTab) activeTab.style.display = "block";
 };
 
+// ---------------------------------------------------------------------------------
+// Edit Logic
+// ---------------------------------------------------------------------------------
+window.populateEditDropdowns = function() {
+    const cardSelect = document.getElementById('editCardSelect');
+    if(cardSelect) {
+        cardSelect.innerHTML = '<option value="">-- اختر نموذج --</option>';
+        if(window.siteData.customCards) {
+            window.siteData.customCards.forEach(c => {
+                cardSelect.innerHTML += `<option value="${c.id}">${c.title}</option>`;
+            });
+        }
+    }
+
+    const pkgSelect = document.getElementById('editPkgSelect');
+    if(pkgSelect) {
+        pkgSelect.innerHTML = '<option value="">-- اختر باقة --</option>';
+        if(window.siteData.customPackages) {
+            window.siteData.customPackages.forEach(p => {
+                pkgSelect.innerHTML += `<option value="${p.id}">${p.ar.title}</option>`;
+            });
+        }
+    }
+};
+
+window.loadEditCard = function() {
+    const id = document.getElementById("editCardSelect").value;
+    if(!id) return;
+    const card = window.siteData.customCards.find(c => c.id == id);
+    if(card) {
+        document.getElementById("editCardTitle").value = card.title;
+        document.getElementById("editCardDesc").value = card.desc;
+        document.getElementById("editCardUrl").value = card.url;
+        document.getElementById("editCardIcon").value = card.icon;
+    }
+};
+
+window.saveEditCard = async function() {
+    const id = document.getElementById("editCardSelect").value;
+    if(!id) return alert("اختر نموذج أولاً");
+    
+    const index = window.siteData.customCards.findIndex(c => c.id == id);
+    if(index > -1) {
+        window.siteData.customCards[index].title = document.getElementById("editCardTitle").value.trim();
+        window.siteData.customCards[index].desc = document.getElementById("editCardDesc").value.trim();
+        window.siteData.customCards[index].url = document.getElementById("editCardUrl").value.trim();
+        window.siteData.customCards[index].icon = document.getElementById("editCardIcon").value.trim();
+        await saveDataToFirestore("تم حفظ التعديلات للنموذج بنجاح!");
+    }
+};
+
+window.loadEditPkg = function() {
+    const id = document.getElementById("editPkgSelect").value;
+    if(!id) return;
+    const pkg = window.siteData.customPackages.find(p => p.id == id);
+    if(pkg) {
+        document.getElementById("editPkgArTitle").value = pkg.ar.title;
+        document.getElementById("editPkgEnTitle").value = pkg.en.title;
+        document.getElementById("editPkgArSub").value = pkg.ar.sub;
+        document.getElementById("editPkgEnSub").value = pkg.en.sub;
+        document.getElementById("editPkgArDesc").value = pkg.ar.desc;
+        document.getElementById("editPkgEnDesc").value = pkg.en.desc;
+        document.getElementById("editPkgArFeat").value = pkg.ar.features.join(', ');
+        document.getElementById("editPkgEnFeat").value = pkg.en.features.join(', ');
+        document.getElementById("editPkgPrice").value = pkg.price || "";
+    }
+};
+
+window.saveEditPkg = async function() {
+    const id = document.getElementById("editPkgSelect").value;
+    if(!id) return alert("اختر باقة أولاً");
+    
+    const index = window.siteData.customPackages.findIndex(p => p.id == id);
+    if(index > -1) {
+        window.siteData.customPackages[index].ar.title = document.getElementById("editPkgArTitle").value.trim();
+        window.siteData.customPackages[index].en.title = document.getElementById("editPkgEnTitle").value.trim();
+        window.siteData.customPackages[index].ar.sub = document.getElementById("editPkgArSub").value.trim();
+        window.siteData.customPackages[index].en.sub = document.getElementById("editPkgEnSub").value.trim();
+        window.siteData.customPackages[index].ar.desc = document.getElementById("editPkgArDesc").value.trim();
+        window.siteData.customPackages[index].en.desc = document.getElementById("editPkgEnDesc").value.trim();
+        window.siteData.customPackages[index].ar.features = document.getElementById("editPkgArFeat").value.split(',').map(f=>f.trim());
+        window.siteData.customPackages[index].en.features = document.getElementById("editPkgEnFeat").value.split(',').map(f=>f.trim());
+        window.siteData.customPackages[index].price = document.getElementById("editPkgPrice").value.trim();
+        await saveDataToFirestore("تم حفظ التعديلات للباقة بنجاح!");
+    }
+};
+
+// ---------------------------------------------------------------------------------
+// Hardcoded Values Editing
+// ---------------------------------------------------------------------------------
 window.loadCurrentProjectUrl = function () {
   const select = document.getElementById("projectSelect");
   const input = document.getElementById("newProjectUrl");
@@ -188,6 +314,9 @@ window.addTickerItem = async function () {
   await saveDataToFirestore("تمت إضافة العبارة للشريط بنجاح!");
 };
 
+// ---------------------------------------------------------------------------------
+// Adding New Custom Data
+// ---------------------------------------------------------------------------------
 window.addNewPortfolioCard = async function () {
   const title = (document.getElementById("newCardTitle") || {}).value?.trim() || "";
   const desc = (document.getElementById("newCardDesc") || {}).value?.trim() || "";
@@ -264,6 +393,9 @@ window.addCustomPackage = async function () {
   await saveDataToFirestore("تمت إضافة الباقة بنجاح وسيظهر لها سهم خاص!");
 };
 
+// ---------------------------------------------------------------------------------
+// Save & Render Engine
+// ---------------------------------------------------------------------------------
 async function saveDataToFirestore(msg) {
   try {
     await setDoc(doc(db, "settings", "site_content"), window.siteData, { merge: true });
@@ -298,10 +430,12 @@ function renderAllData() {
   // Projects / Portfolio Setup
   const grid = document.getElementById("portfolioGrid");
   if (grid && window.siteData.customCards) {
+    // Clear previously injected custom cards to avoid duplicates on re-render
+    document.querySelectorAll('.custom-card-injected').forEach(e => e.remove());
+    
     window.siteData.customCards.forEach((card) => {
-      if (!document.getElementById(`custom-card-${card.id}`)) {
         const cardDiv = document.createElement("div");
-        cardDiv.className = "portfolio-card";
+        cardDiv.className = "portfolio-card custom-card-injected";
         cardDiv.id = `custom-card-${card.id}`;
         cardDiv.onclick = () => {
           document.getElementById("modalTitle").innerHTML = card.title;
@@ -314,7 +448,6 @@ function renderAllData() {
         };
         cardDiv.innerHTML = `<div class="portfolio-img"><i class="${card.icon || "fa-solid fa-globe"}"></i></div><div class="portfolio-info"><h3>${card.title}</h3><p>${card.desc}</p></div>`;
         grid.appendChild(cardDiv);
-      }
     });
   }
 
