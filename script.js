@@ -66,7 +66,8 @@ const translations = {
         "modal-link-btn": "رابط المشروع مباشرة",
         "modal-version": "الإصدار 1.2",
         "admin-login-text": "تسجيل الدخول",
-        "admin-logout-text": "تسجيل الخروج"
+        "admin-logout-text": "تسجيل الخروج",
+        "admin-welcome": "مرحباً بك يا مديري"
     },
     en: {
         "page-title": "FIKRA - Creative Digital Studio",
@@ -128,7 +129,8 @@ const translations = {
         "modal-link-btn": "Live Project Demo",
         "modal-version": "Version 1.2",
         "admin-login-text": "Login",
-        "admin-logout-text": "Logout"
+        "admin-logout-text": "Logout",
+        "admin-welcome": "Welcome my manager,"
     }
 };
 
