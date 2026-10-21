@@ -130,7 +130,7 @@ const translations = {
         "modal-version": "Version 1.2",
         "admin-login-text": "Login",
         "admin-logout-text": "Logout",
-        "admin-welcome": "Welcome my manager,"
+        "admin-welcome": "Welcome my boss,"
     }
 };
 
