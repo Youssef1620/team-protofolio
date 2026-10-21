@@ -123,7 +123,7 @@
             <h2 data-i18n="feat-title">ليه تختار فكرة وتكبر دماغك؟</h2>
             <p data-i18n="feat-p">إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.</p>
         </div>
-        <div class="features-grid">
+        <div class="features-grid" id="featuresGrid">
             <div class="feature-card">
                 <i class="fa-solid fa-rocket feature-icon"></i>
                 <h3 data-i18n="feat-c1-h">سرعة في الإنجاز</h3>
@@ -152,7 +152,7 @@
             <span class="hero-subtitle" data-i18n="srv-sub">WHAT WE MAKE</span>
             <h2 data-i18n="srv-title">من الرسمة لحد ما الموقع يفتح.</h2>
         </div>
-        <div class="services-grid">
+        <div class="services-grid" id="servicesGrid">
             <div class="service-card">
                 <div class="num">01</div>
                 <h3 data-i18n="srv-c1-h">تصميم واجهات المواقع</h3>
@@ -183,7 +183,7 @@
             <p data-i18n="price-p1">الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.</p>
             <p data-i18n="price-p2">الاسعار بتتحدد في البرايفيت حسب شغلك انت , مفيش سعر ثابت انت اللي بتحدد اللي يعجبك من البدايه</p>
         </div>
-        <div class="pricing-grid">
+        <div class="pricing-grid" id="pricingGrid">
             <div class="pricing-card">
                 <h3 data-i18n="price-c1-h">شرارة</h3>
                 <p data-i18n="price-c1-p">لفكرة لسه بتختبر السوق</p>
@@ -327,7 +327,7 @@
 
     <!-- المودال الشامل الخاص ببطاقة التحكم للأدمن -->
     <div id="adminModal" class="modal">
-        <div class="modal-content" style="max-width: 600px; max-height: 85vh; overflow-y: auto;">
+        <div class="modal-content" style="max-width: 800px; max-height: 85vh; overflow-y: auto;">
             <button class="close-btn" onclick="closeAdminModal()"><i class="fa-solid fa-xmark"></i></button>
             
             <!-- واجهة تسجيل الدخول -->
@@ -351,13 +351,17 @@
                     <span id="adminUserEmail" style="font-size: 0.85rem; color: var(--text-muted);"></span>
                 </div>
 
-                <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; overflow-x: auto;">
-                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-links">الروابط</button>
-                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-prices">الأسعار</button>
-                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-ticker">الشريط</button>
-                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-new-card">مشروع جديد</button>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; overflow-x: auto; white-space: nowrap;">
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-links">الروابط</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-prices">تعديل الأسعار</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-ticker">الشريط</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-new-card">النماذج</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-features">المميزات (ليه إحنا)</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-services">الخدمات</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:none; padding: 8px 15px; font-size: 14px;" data-tab="tab-packages">الباقات (العروض)</button>
                 </div>
 
+                <!-- Tabs Content -->
                 <div id="tab-links" class="admin-tab-content">
                     <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">تعديل رابط مشروع قائمة:</h4>
                     <div class="form-group">
@@ -422,6 +426,114 @@
                         <input type="text" id="newCardIcon" class="form-control" placeholder="fa-solid fa-cart-shopping">
                     </div>
                     <button id="addCardBtn" class="btn-primary" style="width: 100%;">إضافة المشروع</button>
+                </div>
+
+                <!-- New Tabs for Features, Services, Packages -->
+                <div id="tab-features" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">إضافة ميزة جديدة (ليه تختار فكرة؟):</h4>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>العنوان (عربي)</label>
+                            <input type="text" id="featArTitle" class="form-control">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>العنوان (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('featArTitle','featEnTitle')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <input type="text" id="featEnTitle" class="form-control">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>الوصف (عربي)</label>
+                            <textarea id="featArDesc" class="form-control" style="height:80px;"></textarea>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>الوصف (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('featArDesc','featEnDesc')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <textarea id="featEnDesc" class="form-control" style="height:80px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>رمز الأيقونة (FontAwesome) - اختياري</label>
+                        <input type="text" id="featIcon" class="form-control" placeholder="fa-solid fa-star">
+                    </div>
+                    <button id="addFeatureBtn" class="btn-primary" style="width: 100%;">إضافة الميزة</button>
+                </div>
+
+                <div id="tab-services" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">إضافة خدمة جديدة (من الرسمة لحد ما الموقع يفتح):</h4>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>العنوان (عربي)</label>
+                            <input type="text" id="srvArTitle" class="form-control">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>العنوان (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('srvArTitle','srvEnTitle')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <input type="text" id="srvEnTitle" class="form-control">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>الوصف (عربي)</label>
+                            <textarea id="srvArDesc" class="form-control" style="height:80px;"></textarea>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>الوصف (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('srvArDesc','srvEnDesc')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <textarea id="srvEnDesc" class="form-control" style="height:80px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>الرقم (مثال: 05)</label>
+                        <input type="text" id="srvNum" class="form-control" placeholder="05">
+                    </div>
+                    <button id="addServiceBtn" class="btn-primary" style="width: 100%;">إضافة الخدمة</button>
+                </div>
+
+                <div id="tab-packages" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">إضافة باقة/عرض جديد (اختار حجم البداية):</h4>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>اسم الباقة (عربي)</label>
+                            <input type="text" id="pkgArTitle" class="form-control">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>اسم الباقة (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('pkgArTitle','pkgEnTitle')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <input type="text" id="pkgEnTitle" class="form-control">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>النبذة السريعة أسفل الاسم (عربي)</label>
+                            <input type="text" id="pkgArSub" class="form-control">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>النبذة السريعة (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('pkgArSub','pkgEnSub')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <input type="text" id="pkgEnSub" class="form-control">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>وصف المودال التفصيلي (عربي)</label>
+                            <textarea id="pkgArDesc" class="form-control" style="height:60px;"></textarea>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>وصف المودال (English) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('pkgArDesc','pkgEnDesc')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <textarea id="pkgEnDesc" class="form-control" style="height:60px;"></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>المميزات عربي (افصل بينها بفاصلة ,)</label>
+                            <textarea id="pkgArFeat" class="form-control" style="height:60px;" placeholder="ميزة 1, ميزة 2, ميزة 3..."></textarea>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>المميزات English (افصل بينها بفاصلة ,) <button type="button" style="background:none;border:none;color:var(--neon-lavender);cursor:pointer;" onclick="if(window.autoTrans) window.autoTrans('pkgArFeat','pkgEnFeat')"><i class="fa-solid fa-language"></i> ترجمة آلي</button></label>
+                            <textarea id="pkgEnFeat" class="form-control" style="height:60px;" placeholder="Feature 1, Feature 2..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>السعر / الملاحظة (يظهر في الباقة)</label>
+                        <input type="text" id="pkgPrice" class="form-control" placeholder="$500">
+                    </div>
+                    <button id="addPackageBtn" class="btn-primary" style="width: 100%;">إضافة الباقة وعرضها</button>
                 </div>
 
                 <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; display: flex; gap: 10px;">

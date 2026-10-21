@@ -20,75 +20,51 @@ setPersistence(auth, browserLocalPersistence).catch((err) => {
   console.error("Persistence error:", err);
 });
 
-// --------------------------------------------------------
-// 1. Admin functions
-// --------------------------------------------------------
-window.loginAdmin = async function () {
-  console.log("[FIKRA Admin] loginAdmin called");
+// Translation Helper function using public API
+window.autoTrans = async function(sourceId, targetId) {
+    const text = document.getElementById(sourceId).value;
+    if (!text) return;
+    const target = document.getElementById(targetId);
+    target.value = "جاري الترجمة آلياً...";
+    try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=ar|en`);
+        const data = await res.json();
+        if(data && data.responseData && data.responseData.translatedText) {
+            target.value = data.responseData.translatedText;
+        } else {
+            target.value = text; // Fallback
+        }
+    } catch(e) {
+        target.value = text; // Fallback
+        console.error("Translation Error: ", e);
+    }
+};
 
+window.loginAdmin = async function () {
   const emailEl = document.getElementById("adminEmail");
   const passEl = document.getElementById("adminPassword");
   const loginBtn = document.getElementById("adminLoginBtn");
-
-  if (!emailEl || !passEl) {
-    alert("عناصر الفورم مش موجودة. رفرش الصفحة.");
-    return;
-  }
+  if (!emailEl || !passEl) return;
 
   const email = emailEl.value.trim();
   const pass = passEl.value.trim();
+  if (!email || !pass) { alert("يرجى كتابة البريد الإلكتروني وكلمة المرور!"); return; }
 
-  if (!email || !pass) {
-    alert("يرجى كتابة البريد الإلكتروني وكلمة المرور!");
-    return;
-  }
-
-  if (loginBtn) {
-    loginBtn.disabled = true;
-    loginBtn.style.opacity = "0.7";
-    loginBtn.innerText = "جاري الدخول...";
-  }
+  if (loginBtn) { loginBtn.disabled = true; loginBtn.style.opacity = "0.7"; loginBtn.innerText = "جاري الدخول..."; }
 
   try {
-    console.log("[FIKRA Admin] Calling signInWithEmailAndPassword...");
-
     const loginPromise = signInWithEmailAndPassword(auth, email, pass);
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error("TIMEOUT")), 15000);
-    });
-
+    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT")), 15000));
     await Promise.race([loginPromise, timeoutPromise]);
-
-    console.log("[FIKRA Admin] Login success");
-    setTimeout(() => {
-      alert("تم تسجيل الدخول بنجاح كـ Admin!");
-    }, 300);
+    setTimeout(() => { alert("تم تسجيل الدخول بنجاح كـ Admin!"); }, 300);
   } catch (err) {
-    console.error("[FIKRA Admin] Login Error:", err);
-
-    let msg = "حدث خطأ أثناء الدخول. حاول مرة أخرى.";
-
-    if (err.message === "TIMEOUT") {
-      msg = "انتهت مهلة الاتصال (15 ثانية).\n\nتأكد من الإنترنت.\nلو بتشتغل من دولة بتحجب Google → جرب VPN.";
-    } else if (["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found", "auth/invalid-email"].includes(err.code)) {
-      msg = "بيانات الدخول غير صحيحة. تأكد من الإيميل والباسورد.";
-    } else if (err.code === "auth/too-many-requests") {
-      msg = "تم حظر المحاولات مؤقتاً. استنى دقيقة وجرب تاني.";
-    } else if (err.code === "auth/network-request-failed") {
-      msg = "مشكلة في الشبكة أو Firebase محجوب. جرب VPN.";
-    } else if (err.code === "auth/operation-not-allowed") {
-      msg = "تسجيل الدخول بالإيميل مش مفعل في Firebase Console.";
-    } else if (err.message) {
-      msg = "خطأ: " + err.message;
-    }
-
+    let msg = "حدث خطأ أثناء الدخول.";
+    if (err.message === "TIMEOUT") msg = "انتهت مهلة الاتصال.";
+    else if (["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found", "auth/invalid-email"].includes(err.code)) msg = "بيانات غير صحيحة.";
+    else if (err.code === "auth/too-many-requests") msg = "تم حظر المحاولات مؤقتاً.";
     alert(msg);
   } finally {
-    if (loginBtn) {
-      loginBtn.disabled = false;
-      loginBtn.style.opacity = "1";
-      loginBtn.innerText = "تسجيل الدخول";
-    }
+    if (loginBtn) { loginBtn.disabled = false; loginBtn.style.opacity = "1"; loginBtn.innerText = "تسجيل الدخول"; }
   }
 };
 
@@ -98,49 +74,29 @@ window.logoutAdmin = async function () {
     const modal = document.getElementById("adminModal");
     if (modal) modal.style.display = "none";
     alert("تم تسجيل الخروج بنجاح");
-  } catch (err) {
-    console.error("Logout Error:", err);
-    alert("حصل خطأ أثناء الخروج");
-  }
+  } catch (err) { alert("حصل خطأ أثناء الخروج"); }
 };
 
-// --------------------------------------------------------
-// 2. Safe button binding
-// --------------------------------------------------------
-window.forceBindButtons = function forceBindButtons() {
-  console.log("[FIKRA Admin] forceBindButtons running");
-
+window.forceBindButtons = function () {
   const loginBtn = document.getElementById("adminLoginBtn");
   if (loginBtn) {
     const newLoginBtn = loginBtn.cloneNode(true);
     loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
-    newLoginBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log("[FIKRA Admin] Login button clicked");
-      window.loginAdmin();
-    });
+    newLoginBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.loginAdmin(); });
   }
 
   const logoutBtn = document.getElementById("adminLogoutBtn");
   if (logoutBtn) {
     const newLogoutBtn = logoutBtn.cloneNode(true);
     logoutBtn.parentNode.replaceChild(newLogoutBtn, logoutBtn);
-    newLogoutBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.logoutAdmin();
-    });
+    newLogoutBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.logoutAdmin(); });
   }
 
   const bindClick = (id, fn) => {
     const el = document.getElementById(id);
     if (el && typeof fn === "function") {
       el.onclick = null;
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        fn();
-      });
+      el.addEventListener("click", (e) => { e.preventDefault(); fn(); });
     }
   };
 
@@ -148,6 +104,11 @@ window.forceBindButtons = function forceBindButtons() {
   bindClick("savePricesBtn", window.savePrices);
   bindClick("addTickerBtn", window.addTickerItem);
   bindClick("addCardBtn", window.addNewPortfolioCard);
+  
+  // New buttons
+  bindClick("addFeatureBtn", window.addCustomFeature);
+  bindClick("addServiceBtn", window.addCustomService);
+  bindClick("addPackageBtn", window.addCustomPackage);
 
   const projectSelect = document.getElementById("projectSelect");
   if (projectSelect) {
@@ -165,20 +126,14 @@ window.forceBindButtons = function forceBindButtons() {
   });
 };
 
-// --------------------------------------------------------
-// 3. Data & UI
-// --------------------------------------------------------
 window.siteData = {
-  projectUrls: {
-    project1: "https://fikra2website.github.io/menu-fikra/",
-    project2: "https://example.com/project2",
-    project3: "https://example.com/project3",
-    project4: "https://example.com/project4",
-    project5: "https://personal-university-dashboad.vercel.app/"
-  },
+  projectUrls: { project1: "", project2: "", project3: "", project4: "", project5: "" },
   prices: { price1: "", price2: "", price3: "" },
   tickerItems: ["موبايل أولاً", "UI / UX", "من الفكرة للصفحة", "FIKRA", "ويب ديزاين", "فرونت إند", "صفحات هبوط"],
-  customCards: []
+  customCards: [],
+  customFeatures: [],
+  customServices: [],
+  customPackages: []
 };
 
 async function loadSiteData() {
@@ -188,9 +143,7 @@ async function loadSiteData() {
     if (docSnap.exists()) {
       window.siteData = { ...window.siteData, ...docSnap.data() };
     }
-  } catch (err) {
-    console.log("Using default data", err);
-  }
+  } catch (err) { console.log("Using default data", err); }
   renderAllData();
 }
 
@@ -240,25 +193,75 @@ window.addNewPortfolioCard = async function () {
   const desc = (document.getElementById("newCardDesc") || {}).value?.trim() || "";
   const url = (document.getElementById("newCardUrl") || {}).value?.trim() || "";
   const icon = (document.getElementById("newCardIcon") || {}).value?.trim() || "";
-
-  if (!title || !url) {
-    alert("يرجى إدخال العنوان والرابط على الأقل");
-    return;
-  }
-
+  if (!title || !url) return alert("يرجى إدخال العنوان والرابط على الأقل");
   if (!window.siteData.customCards) window.siteData.customCards = [];
-  window.siteData.customCards.push({
-    id: Date.now(),
-    title, desc, url,
-    icon: icon || "fa-solid fa-globe"
-  });
-
-  ["newCardTitle", "newCardDesc", "newCardUrl", "newCardIcon"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = "";
-  });
-
+  window.siteData.customCards.push({ id: Date.now(), title, desc, url, icon: icon || "fa-solid fa-globe" });
+  ["newCardTitle", "newCardDesc", "newCardUrl", "newCardIcon"].forEach(id => { const el = document.getElementById(id); if(el) el.value = ""; });
   await saveDataToFirestore("تمت إضافة المشروع الجديد بنجاح!");
+};
+
+window.addCustomFeature = async function () {
+  const arTitle = document.getElementById("featArTitle").value.trim();
+  const enTitle = document.getElementById("featEnTitle").value.trim() || arTitle;
+  const arDesc = document.getElementById("featArDesc").value.trim();
+  const enDesc = document.getElementById("featEnDesc").value.trim() || arDesc;
+  const icon = document.getElementById("featIcon").value.trim() || "fa-solid fa-star";
+  
+  if(!arTitle || !arDesc) return alert("يرجى إدخال العنوان والوصف بالعربي على الأقل!");
+  
+  if (!window.siteData.customFeatures) window.siteData.customFeatures = [];
+  window.siteData.customFeatures.push({
+      id: Date.now(), icon,
+      ar: { title: arTitle, desc: arDesc },
+      en: { title: enTitle, desc: enDesc }
+  });
+  
+  ["featArTitle","featEnTitle","featArDesc","featEnDesc","featIcon"].forEach(id => document.getElementById(id).value = "");
+  await saveDataToFirestore("تمت إضافة الميزة بنجاح!");
+};
+
+window.addCustomService = async function () {
+  const arTitle = document.getElementById("srvArTitle").value.trim();
+  const enTitle = document.getElementById("srvEnTitle").value.trim() || arTitle;
+  const arDesc = document.getElementById("srvArDesc").value.trim();
+  const enDesc = document.getElementById("srvEnDesc").value.trim() || arDesc;
+  const num = document.getElementById("srvNum").value.trim() || "05";
+  
+  if(!arTitle || !arDesc) return alert("يرجى إدخال العنوان والوصف بالعربي على الأقل!");
+  
+  if (!window.siteData.customServices) window.siteData.customServices = [];
+  window.siteData.customServices.push({
+      id: Date.now(), num,
+      ar: { title: arTitle, desc: arDesc },
+      en: { title: enTitle, desc: enDesc }
+  });
+  
+  ["srvArTitle","srvEnTitle","srvArDesc","srvEnDesc","srvNum"].forEach(id => document.getElementById(id).value = "");
+  await saveDataToFirestore("تمت إضافة الخدمة بنجاح!");
+};
+
+window.addCustomPackage = async function () {
+  const arTitle = document.getElementById("pkgArTitle").value.trim();
+  const enTitle = document.getElementById("pkgEnTitle").value.trim() || arTitle;
+  const arSub = document.getElementById("pkgArSub").value.trim();
+  const enSub = document.getElementById("pkgEnSub").value.trim() || arSub;
+  const arDesc = document.getElementById("pkgArDesc").value.trim();
+  const enDesc = document.getElementById("pkgEnDesc").value.trim() || arDesc;
+  const arFeat = document.getElementById("pkgArFeat").value.trim();
+  const enFeat = document.getElementById("pkgEnFeat").value.trim() || arFeat;
+  const price = document.getElementById("pkgPrice").value.trim();
+  
+  if(!arTitle || !arDesc || !arFeat) return alert("البيانات العربية الأساسية مطلوبة (اسم، وصف، مميزات)!");
+  
+  if (!window.siteData.customPackages) window.siteData.customPackages = [];
+  window.siteData.customPackages.push({
+      id: Date.now(), price,
+      ar: { title: arTitle, sub: arSub, desc: arDesc, features: arFeat.split(',').map(f => f.trim()) },
+      en: { title: enTitle, sub: enSub, desc: enDesc, features: enFeat.split(',').map(f => f.trim()) }
+  });
+  
+  ["pkgArTitle","pkgEnTitle","pkgArSub","pkgEnSub","pkgArDesc","pkgEnDesc","pkgArFeat","pkgEnFeat","pkgPrice"].forEach(id => document.getElementById(id).value = "");
+  await saveDataToFirestore("تمت إضافة الباقة بنجاح وسيظهر لها سهم خاص!");
 };
 
 async function saveDataToFirestore(msg) {
@@ -266,36 +269,33 @@ async function saveDataToFirestore(msg) {
     await setDoc(doc(db, "settings", "site_content"), window.siteData, { merge: true });
     renderAllData();
     alert(msg);
-  } catch (err) {
-    console.error("Save Error:", err);
-    alert("حدث خطأ أثناء الحفظ");
-  }
+  } catch (err) { console.error("Save Error:", err); alert("حدث خطأ أثناء الحفظ"); }
 }
 
 function renderAllData() {
+  const currentLang = document.documentElement.getAttribute("lang") || "ar";
+
+  // Prices Setup
   ["price1", "price2", "price3"].forEach((key, index) => {
     const el = document.getElementById(`price-tag-${index + 1}`);
     const val = window.siteData.prices ? window.siteData.prices[key] : "";
     if (el) {
-      if (val && val.trim() !== "") {
-        el.innerText = val;
-        el.style.display = "block";
-      } else {
-        el.style.display = "none";
-      }
+      if (val && val.trim() !== "") { el.innerText = val; el.style.display = "block"; }
+      else { el.style.display = "none"; }
     }
   });
 
+  // Ticker Setup
   const container = document.getElementById("tickerContainer");
   if (container && window.siteData.tickerItems) {
-    const items = window.siteData.tickerItems;
     let html = "";
-    [...items, ...items].forEach((item) => {
+    [...window.siteData.tickerItems, ...window.siteData.tickerItems].forEach((item) => {
       html += `<div class="ticker-item">${item}</div>`;
     });
     container.innerHTML = html;
   }
 
+  // Projects / Portfolio Setup
   const grid = document.getElementById("portfolioGrid");
   if (grid && window.siteData.customCards) {
     window.siteData.customCards.forEach((card) => {
@@ -306,28 +306,93 @@ function renderAllData() {
         cardDiv.onclick = () => {
           document.getElementById("modalTitle").innerHTML = card.title;
           document.getElementById("modalDesc").innerHTML = card.desc;
-          document.getElementById("modalLink").href = card.url;
+          if(document.getElementById("modalLink")) {
+             document.getElementById("modalLink").href = card.url;
+             document.getElementById("modalLink").style.display = card.url ? 'inline-block' : 'none';
+          }
           document.getElementById("projectModal").style.display = "flex";
         };
-        cardDiv.innerHTML = `
-          <div class="portfolio-img"><i class="${card.icon || "fa-solid fa-globe"}"></i></div>
-          <div class="portfolio-info"><h3>${card.title}</h3><p>${card.desc}</p></div>
-        `;
+        cardDiv.innerHTML = `<div class="portfolio-img"><i class="${card.icon || "fa-solid fa-globe"}"></i></div><div class="portfolio-info"><h3>${card.title}</h3><p>${card.desc}</p></div>`;
         grid.appendChild(cardDiv);
       }
     });
   }
+
+  // Features Setup
+  const featGrid = document.getElementById("featuresGrid");
+  if(featGrid && window.siteData.customFeatures) {
+      document.querySelectorAll('.custom-feature').forEach(e => e.remove());
+      window.siteData.customFeatures.forEach(feat => {
+          const div = document.createElement('div');
+          div.className = 'feature-card custom-feature';
+          div.innerHTML = `
+              <i class="${feat.icon} feature-icon"></i>
+              <h3 class="dynamic-lang" data-ar="${feat.ar.title}" data-en="${feat.en.title}">${currentLang === 'ar' ? feat.ar.title : feat.en.title}</h3>
+              <p class="dynamic-lang" data-ar="${feat.ar.desc}" data-en="${feat.en.desc}">${currentLang === 'ar' ? feat.ar.desc : feat.en.desc}</p>
+          `;
+          featGrid.appendChild(div);
+      });
+  }
+
+  // Services Setup
+  const srvGrid = document.getElementById("servicesGrid");
+  if(srvGrid && window.siteData.customServices) {
+      document.querySelectorAll('.custom-service').forEach(e => e.remove());
+      window.siteData.customServices.forEach(srv => {
+          const div = document.createElement('div');
+          div.className = 'service-card custom-service';
+          div.innerHTML = `
+              <div class="num">${srv.num}</div>
+              <h3 class="dynamic-lang" data-ar="${srv.ar.title}" data-en="${srv.en.title}">${currentLang === 'ar' ? srv.ar.title : srv.en.title}</h3>
+              <p class="dynamic-lang" data-ar="${srv.ar.desc}" data-en="${srv.en.desc}">${currentLang === 'ar' ? srv.ar.desc : srv.en.desc}</p>
+          `;
+          srvGrid.appendChild(div);
+      });
+  }
+
+  // Packages Setup
+  const pkgGrid = document.getElementById("pricingGrid");
+  if(pkgGrid && window.siteData.customPackages) {
+      document.querySelectorAll('.custom-pkg').forEach(e => e.remove());
+      window.siteData.customPackages.forEach(pkg => {
+          const div = document.createElement('div');
+          div.className = 'pricing-card highlight custom-pkg';
+          
+          let featuresHTML = pkg.ar.features.map((f, i) => {
+              let enF = pkg.en.features[i] || f;
+              return `<li class="dynamic-lang" data-ar="${f}" data-en="${enF}">${currentLang === 'ar' ? f : enF}</li>`;
+          }).join('');
+
+          div.innerHTML = `
+              <div class="custom-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+              <h3 class="dynamic-lang" data-ar="${pkg.ar.title}" data-en="${pkg.en.title}">${currentLang === 'ar' ? pkg.ar.title : pkg.en.title}</h3>
+              <p class="dynamic-lang" data-ar="${pkg.ar.sub}" data-en="${pkg.en.sub}">${currentLang === 'ar' ? pkg.ar.sub : pkg.en.sub}</p>
+              ${pkg.price ? `<div class="price-display-tag" style="display:block;">${pkg.price}</div>` : ''}
+              <ul>${featuresHTML}</ul>
+              <button class="btn-block" onclick="openPricingModal('m-title-${pkg.id}', 'm-desc-${pkg.id}')" style="background-color: var(--bg-color); color: var(--text-light);">
+                  <span class="dynamic-lang" data-ar="تفاصيل (About)" data-en="Details (About)">${currentLang === 'ar' ? "تفاصيل (About)" : "Details (About)"}</span>
+              </button>
+          `;
+
+          // Append dynamic modal translations safely globally
+          if(typeof translations !== 'undefined') {
+              translations['ar'][`m-title-${pkg.id}`] = pkg.ar.title;
+              translations['ar'][`m-desc-${pkg.id}`] = pkg.ar.desc;
+              translations['en'][`m-title-${pkg.id}`] = pkg.en.title;
+              translations['en'][`m-desc-${pkg.id}`] = pkg.en.desc;
+          }
+
+          pkgGrid.appendChild(div);
+      });
+  }
 }
 
 onAuthStateChanged(auth, (user) => {
-  console.log("[FIKRA Admin] Auth state:", user ? user.email : "none");
-
   const loginForm = document.getElementById("adminLoginForm");
   const dashboard = document.getElementById("adminDashboard");
   const badge = document.getElementById("adminLogoBadge");
   const quickBtn = document.getElementById("adminQuickBtn");
   const emailText = document.getElementById("adminUserEmail");
-  
   const welcomeMsg = document.getElementById("adminWelcomeMsg");
   const adminFirstNameEl = document.getElementById("adminFirstName");
 
@@ -344,35 +409,23 @@ onAuthStateChanged(auth, (user) => {
       adminFirstNameEl.innerText = firstName;
       welcomeMsg.style.display = "inline-block";
     }
-
     window.loadCurrentProjectUrl();
-    if (window.siteData?.prices) {
-      ["price1", "price2", "price3"].forEach((key, i) => {
-        const el = document.getElementById(`price${i+1}Input`);
-        if (el) el.value = window.siteData.prices[key] || "";
-      });
-    }
   } else {
     if (loginForm) loginForm.style.display = "block";
     if (dashboard) dashboard.style.display = "none";
     if (badge) badge.style.display = "none";
     if (quickBtn) quickBtn.style.display = "none";
-    
     if (welcomeMsg) welcomeMsg.style.display = "none";
   }
 });
 
 function initAdmin() {
-  console.log("[FIKRA Admin] initAdmin");
   window.forceBindButtons();
   loadSiteData();
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initAdmin);
-} else {
-  initAdmin();
-}
+if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", initAdmin); } 
+else { initAdmin(); }
 
 setTimeout(window.forceBindButtons, 1000);
 setTimeout(window.forceBindButtons, 2500);

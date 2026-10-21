@@ -157,7 +157,12 @@ function toggleLanguage() {
         }
     });
 
-    // ترجمة أزرار الأدمن برمجياً
+    // تحديث العناصر الديناميكية اللي انضافت من الادمن
+    document.querySelectorAll('.dynamic-lang').forEach(el => {
+        const text = el.getAttribute(`data-${currentLang}`);
+        if(text) el.innerHTML = text;
+    });
+
     const adminLoginBtn = document.getElementById("adminLoginBtn");
     if(adminLoginBtn && adminLoginBtn.innerText !== "جاري الدخول...") {
         adminLoginBtn.innerText = translations[currentLang]["admin-login-text"];
@@ -215,7 +220,12 @@ function openModal(titleKey, descKey, linkUrl, projectKey) {
 
     document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey] || titleKey;
     document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey] || descKey;
-    document.getElementById('modalLink').href = targetLink;
+    
+    if(document.getElementById('modalLink')) {
+        document.getElementById('modalLink').href = targetLink || '#';
+        if(!targetLink) document.getElementById('modalLink').style.display = 'none';
+        else document.getElementById('modalLink').style.display = 'inline-block';
+    }
 
     const versionEl = document.getElementById('modalVersion');
     if (versionEl) {
@@ -315,7 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function openAdminModal() {
     document.getElementById("adminModal").style.display = "flex";
-    // Re-bind admin buttons every time modal opens (safety)
     if (typeof window.forceBindButtons === "function") {
         setTimeout(window.forceBindButtons, 50);
     }
