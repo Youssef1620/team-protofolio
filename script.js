@@ -1,4 +1,3 @@
-// --- القاموس الخاص باللغتين ---
 const translations = {
     ar: {
         "page-title": "FIKRA - Creative Digital Studio",
@@ -65,7 +64,9 @@ const translations = {
         "modal-4-title": "بورتفوليو شركات", "modal-4-desc": "واجهة بتعبر عن كيان الشركة، بتدي انطباع بالثقة والاحترافية من أول سكرول.",
         "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.<br><br><strong>تحديث 1.2:</strong><br>• تم تعديل بعض النصوص الغير مطابقة للغة المستخدمة في الواجهة<br>• تم تحسين الـ AI وتطويره وتحسين جودة المايك بشكل ملحوظ ومدته في السماع<br>• هناك تحسينات أخرى ملحوظة عن التحديث رقم 1.1<br>• <em>(ملحوظة)</em> يجب استخراج API من Google Studio لاستخدام الـ AI",
         "modal-link-btn": "رابط المشروع مباشرة",
-        "modal-version": "الإصدار 1.2"
+        "modal-version": "الإصدار 1.2",
+        "admin-login-text": "تسجيل الدخول",
+        "admin-logout-text": "تسجيل الخروج"
     },
     en: {
         "page-title": "FIKRA - Creative Digital Studio",
@@ -79,19 +80,12 @@ const translations = {
         "port-sub": "SELECTED DIRECTIONS",
         "port-title": "Our Style, No Fake Logos.",
         "port-p": "Website UI concepts. Not apps, and no borrowed client logos. When we work on your idea, it's under your name.",
-        "port-c1-h": "Food & Delivery", "port-c1-p": "UI/UX that catches the eye. Ordering in seconds with the smoothest experience.",
-        "port-c2-h": "E-Learning Platform", "port-c2-p": "Clean design built to help students focus without distractions.",
-        "port-c3-h": "E-Commerce", "port-c3-p": "Built to sell. A seamless buying journey from landing page to checkout.",
-        "port-c4-h": "Corporate Portfolio", "port-c4-p": "A visual identity that reflects trust and professionalism from the first scroll.",
-        "port-c5-h": "Dashboard", "port-c5-p": "Static dashboard page for clear data visualization.",
-        "feat-title": "Why Choose FIKRA & Relax?",
-        "feat-p": "We don't just do regular work; we build websites that live and grow your business.",
+        "feat-title": "Why Choose FIKRA & Relax?", "feat-p": "We don't just do regular work; we build websites that live and grow your business.",
         "feat-c1-h": "Fast Execution", "feat-c1-p": "Your time is money. We deliver on time, no excuses.",
         "feat-c2-h": "Outstanding Quality", "feat-c2-p": "We only deliver when we are 100% satisfied. Clean code and unique design.",
         "feat-c3-h": "We Are Your Partners", "feat-c3-p": "Your success is ours. We brainstorm with you and give you market insights.",
         "feat-c4-h": "Continuous Support", "feat-c4-p": "Available 24/7. We solve any concerns instantly before handover to prevent delays.",
-        "srv-sub": "WHAT WE MAKE",
-        "srv-title": "From Sketch to Launch.",
+        "srv-sub": "WHAT WE MAKE", "srv-title": "From Sketch to Launch.",
         "srv-c1-h": "Web UI Design", "srv-c1-p": "Every screen has a purpose. Designed for mobile first, then scaled up.",
         "srv-c2-h": "Front-End", "srv-c2-p": "Building the UI: Fast, clear, and straightforward pages.",
         "srv-c3-h": "Decision-Making Pages", "srv-c3-p": "Landing pages or full sites that guide the customer to the next step.",
@@ -132,7 +126,9 @@ const translations = {
         "modal-4-title": "Corporate Portfolio", "modal-4-desc": "A UI that expresses the company's entity, giving an impression of trust and professionalism from the first scroll.",
         "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read, suitable for platforms requiring continuous monitoring.<br><br><strong>Update 1.2:</strong><br>• Fixed some texts that didn't match the language used in the interface<br>• Improved the AI, developed it, and significantly enhanced the microphone quality and listening duration<br>• There are other notable improvements over update 1.1<br>• <em>(Note)</em> You must extract the API from Google Studio to use the AI",
         "modal-link-btn": "Live Project Demo",
-        "modal-version": "Version 1.2"
+        "modal-version": "Version 1.2",
+        "admin-login-text": "Login",
+        "admin-logout-text": "Logout"
     }
 };
 
@@ -159,6 +155,16 @@ function toggleLanguage() {
         }
     });
 
+    // ترجمة أزرار الأدمن برمجياً
+    const adminLoginBtn = document.getElementById("adminLoginBtn");
+    if(adminLoginBtn && adminLoginBtn.innerText !== "جاري الدخول...") {
+        adminLoginBtn.innerText = translations[currentLang]["admin-login-text"];
+    }
+    const adminLogoutBtn = document.getElementById("adminLogoutBtn");
+    if(adminLogoutBtn) {
+        adminLogoutBtn.innerText = translations[currentLang]["admin-logout-text"];
+    }
+
     let nameInput = document.getElementById('userName').value;
     if (document.getElementById('displayName')) {
         document.getElementById('displayName').innerText = nameInput ? nameInput.split(' ')[0] : (currentLang === 'ar' ? 'عميلنا العزيز' : 'Client');
@@ -169,13 +175,10 @@ function toggleLanguage() {
     }
 }
 
-/* دوال قائمة الموبايل الجديدة */
 function toggleMobileMenu() {
     const navWrapper = document.getElementById('navWrapper');
     const icon = document.querySelector('.mobile-menu-btn i');
-    
     navWrapper.classList.toggle('active');
-    
     if (navWrapper.classList.contains('active')) {
         icon.classList.remove('fa-bars');
         icon.classList.add('fa-xmark');
@@ -188,7 +191,6 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
     const navWrapper = document.getElementById('navWrapper');
     const icon = document.querySelector('.mobile-menu-btn i');
-    
     if (navWrapper.classList.contains('active')) {
         navWrapper.classList.remove('active');
         icon.classList.remove('fa-xmark');
@@ -203,15 +205,19 @@ window.onscroll = function() {
     document.getElementById("progress-bar").style.width = scrolled + "%";
 };
 
-function openModal(titleKey, descKey, linkUrl) {
-    document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey];
-    document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey];
-    document.getElementById('modalLink').href = linkUrl;
+function openModal(titleKey, descKey, linkUrl, projectKey) {
+    let targetLink = linkUrl;
+    if (window.siteData && window.siteData.projectUrls && projectKey) {
+        targetLink = window.siteData.projectUrls[projectKey] || linkUrl;
+    }
 
-    // إظهار الإصدار 1.2 تحت الرابط المباشر لمشروع الـ Dashboard فقط
+    document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey] || titleKey;
+    document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey] || descKey;
+    document.getElementById('modalLink').href = targetLink;
+
     const versionEl = document.getElementById('modalVersion');
     if (versionEl) {
-        if (linkUrl && linkUrl.includes('personal-university')) {
+        if (targetLink && targetLink.includes('personal-university')) {
             versionEl.innerHTML = translations[currentLang]['modal-version'] || 'Version 1.2';
             versionEl.style.display = 'block';
         } else {
@@ -228,8 +234,8 @@ function closeModal() {
 }
 
 function openPricingModal(titleKey, descKey) {
-    document.getElementById('pricingModalTitle').innerHTML = translations[currentLang][titleKey];
-    document.getElementById('pricingModalDesc').innerHTML = translations[currentLang][descKey];
+    document.getElementById('pricingModalTitle').innerHTML = translations[currentLang][titleKey] || titleKey;
+    document.getElementById('pricingModalDesc').innerHTML = translations[currentLang][descKey] || descKey;
     document.getElementById('pricingModal').style.display = 'flex';
 }
 
@@ -240,37 +246,27 @@ function closePricingModal() {
 window.onclick = function(event) {
     let projectModal = document.getElementById('projectModal');
     let pricingModal = document.getElementById('pricingModal');
-    if (event.target == projectModal) {
-        projectModal.style.display = "none";
-    }
-    if (event.target == pricingModal) {
-        pricingModal.style.display = "none";
-    }
-}
+    if (event.target == projectModal) projectModal.style.display = "none";
+    if (event.target == pricingModal) pricingModal.style.display = "none";
+};
 
 function generateBrief() {
     let nameInput = document.getElementById('userName').value;
     let name = nameInput || (currentLang === 'ar' ? 'عميلنا العزيز' : 'Dear Client');
-    
     let typeSelect = document.getElementById('workType');
     let type = typeSelect.options[typeSelect.selectedIndex].text;
-    
     let contactInput = document.getElementById('userContact').value;
     let contact = contactInput || (currentLang === 'ar' ? 'لم يُحدد' : 'Not specified');
-    
     let ideaInput = document.getElementById('userIdea').value;
     let idea = ideaInput || (currentLang === 'ar' ? 'لم تُحدد الفكرة بعد' : 'Idea not specified yet');
 
     document.getElementById('displayName').innerText = name.split(' ')[0];
-
     let labels = currentLang === 'ar' 
         ? { title: "طلب جديد - فكرة FIKRA", name: "الاسم", contact: "التواصل", type: "النوع", idea: "الفكرة" }
         : { title: "New Request - FIKRA", name: "Name", contact: "Contact", type: "Type", idea: "Idea" };
 
     let finalMessage = `${labels.title}<br>${labels.name}: ${name}<br>${labels.contact}: ${contact}<br>${labels.type}: ${type}<br>${labels.idea}: ${idea}`;
-
     document.getElementById('finalText').innerHTML = finalMessage;
-    
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('result-view').style.display = 'block';
 }
@@ -279,21 +275,50 @@ function resetForm() {
     document.getElementById('userName').value = '';
     document.getElementById('userContact').value = '';
     document.getElementById('userIdea').value = '';
-    
     document.getElementById('result-view').style.display = 'none';
     document.getElementById('form-view').style.display = 'grid';
 }
 
 function copyBrief() {
     let textToCopy = document.getElementById('finalText').innerText;
-    
-    let tempInput = document.createElement("textarea");
-    tempInput.value = textToCopy;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-    
-    let alertMsg = currentLang === 'ar' ? "تم نسخ الرسالة بنجاح! تقدر تبعتها دلوقتي." : "Message copied successfully! You can send it now.";
-    alert(alertMsg);
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        let alertMsg = currentLang === 'ar' ? "تم نسخ الرسالة بنجاح! تقدر تبعتها دلوقتي." : "Message copied successfully!";
+        alert(alertMsg);
+    });
+}
+
+// كود الحركة السرية للـ Admin (6 كليكات)
+let secretClickCount = 0;
+let secretClickTimer;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const secretTrigger = document.getElementById("secretAdminTrigger");
+    if (secretTrigger) {
+        secretTrigger.addEventListener("click", (e) => {
+            e.preventDefault();
+            secretClickCount++;
+
+            clearTimeout(secretClickTimer);
+            secretClickTimer = setTimeout(() => {
+                secretClickCount = 0;
+            }, 2500);
+
+            if (secretClickCount === 6) {
+                secretClickCount = 0;
+                openAdminModal();
+            }
+        });
+    }
+});
+
+function openAdminModal() {
+    document.getElementById("adminModal").style.display = "flex";
+    // Re-bind admin buttons every time modal opens (safety)
+    if (typeof window.forceBindButtons === "function") {
+        setTimeout(window.forceBindButtons, 50);
+    }
+}
+
+function closeAdminModal() {
+    document.getElementById("adminModal").style.display = "none";
 }

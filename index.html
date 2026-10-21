@@ -5,33 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="fikra.png">
     <title data-i18n="page-title">FIKRA - Creative Digital Studio</title>
-    <!-- أيقونة الموقع -->
     <link rel="icon" href="329553d1-f54e-49e5-a449-7454feba8ce6_2.jpg" type="image/jpeg">
-    
-    <!-- خطوط جوجل (Tajawal) -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- ملف CSS الرئيسي -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- شريط التمرير -->
     <div id="progress-bar"></div>
 
-    <!-- الهيدر الجديد المعدل للموبايل -->
     <header>
-        <a href="#" class="logo-text">FIKRA</a>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="#" class="logo-text">FIKRA</a>
+            <span id="adminLogoBadge" class="admin-badge" style="display: none;"><i class="fa-solid fa-shield-halved"></i> ADMIN</span>
+        </div>
         
-        <!-- زر القائمة (الهامبرجر) للموبايل -->
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
             <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- الغلاف اللي هيلم اللينكات والزراير عشان يختفي ويظهر في الموبايل -->
         <div class="nav-wrapper" id="navWrapper">
             <nav>
                 <a href="#portfolio" onclick="closeMobileMenu()" data-i18n="nav-portfolio">النماذج</a>
@@ -42,6 +34,9 @@
             <div class="header-actions">
                 <button id="lang-toggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
                 <a href="#contact" class="btn-primary" onclick="closeMobileMenu()" data-i18n="nav-contact">تواصل مع فكرة</a>
+                <button id="adminQuickBtn" class="btn-outline" style="display: none; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--neon-lavender); color: var(--neon-lavender);" onclick="openAdminModal()">
+                    <i class="fa-solid fa-sliders"></i> لوحة التحكم
+                </button>
             </div>
         </div>
     </header>
@@ -49,9 +44,7 @@
     <section class="hero">
         <span class="hero-subtitle" data-i18n="hero-sub">FIKRA · WEB DESIGN · FRONT END</span>
         <h1 data-i18n="hero-title">فكرتك تستاهل<br>واجهة <span>توقف التقليب في بحث جوجل</span>.</h1>
-        
         <p data-i18n="hero-p2" style="font-size: 1.3rem; color: var(--neon-lavender); margin-bottom: 15px; font-weight: 700;">FIKRA هي الوسيط اللي يقربك لتفكير الزبون.</p>
-        
         <p data-i18n="hero-p">ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.</p>
         <div style="display: flex; justify-content: center; gap: 20px;">
             <a href="#contact" class="btn-primary" data-i18n="hero-btn1">ابدأ بفكرتك</a>
@@ -59,9 +52,8 @@
         </div>
     </section>
 
-    <!-- شريط الكلمات المتحرك -->
     <div class="ticker-wrap">
-        <div class="ticker">
+        <div class="ticker" id="tickerContainer">
             <div class="ticker-item" data-i18n="ticker-1">موبايل أولاً</div>
             <div class="ticker-item" data-i18n="ticker-2">UI / UX</div>
             <div class="ticker-item" data-i18n="ticker-3">من الفكرة للصفحة</div>
@@ -69,15 +61,9 @@
             <div class="ticker-item" data-i18n="ticker-5">ويب ديزاين</div>
             <div class="ticker-item" data-i18n="ticker-6">فرونت إند</div>
             <div class="ticker-item" data-i18n="ticker-7">صفحات هبوط</div>
-            <div class="ticker-item" data-i18n="ticker-1">موبايل أولاً</div>
-            <div class="ticker-item" data-i18n="ticker-2">UI / UX</div>
-            <div class="ticker-item" data-i18n="ticker-3">من الفكرة للصفحة</div>
-            <div class="ticker-item" data-i18n="ticker-4">FIKRA</div>
-            <div class="ticker-item" data-i18n="ticker-5">ويب ديزاين</div>
         </div>
     </div>
 
-    <!-- قسم النماذج (شغلنا) -->
     <section id="portfolio">
         <div class="section-header">
             <span class="hero-subtitle" style="margin-bottom: 10px;" data-i18n="port-sub">SELECTED DIRECTIONS</span>
@@ -85,8 +71,8 @@
             <p data-i18n="port-p">نماذج مواقع وواجهات. مش تطبيقات، ومش شعارات عملاء مستعارة. لما نشتغل على فكرتك، الاسم يبقى بتاعك.</p>
         </div>
         
-        <div class="portfolio-grid">
-            <div class="portfolio-card" onclick="openModal('modal-1-title', 'modal-1-desc', 'https://fikra2website.github.io/menu-fikra/')">
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="portfolio-card" onclick="openModal('modal-1-title', 'modal-1-desc', 'https://fikra2website.github.io/menu-fikra/', 'project1')">
                 <div class="portfolio-img"><i class="fa-solid fa-burger"></i></div>
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c1-h">مطاعم وطلبات</h3>
@@ -94,7 +80,7 @@
                 </div>
             </div>
             
-            <div class="portfolio-card" onclick="openModal('modal-2-title', 'modal-2-desc', 'https://example.com/project2')">
+            <div class="portfolio-card" onclick="openModal('modal-2-title', 'modal-2-desc', 'https://example.com/project2', 'project2')">
                 <div class="portfolio-img"><i class="fa-solid fa-laptop-code"></i></div>
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c2-h">منصة تعليمية</h3>
@@ -102,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" onclick="openModal('modal-3-title', 'modal-3-desc', 'https://example.com/project3')">
+            <div class="portfolio-card" onclick="openModal('modal-3-title', 'modal-3-desc', 'https://example.com/project3', 'project3')">
                 <div class="portfolio-img"><i class="fa-solid fa-cart-shopping"></i></div>
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c3-h">E-Commerce</h3>
@@ -110,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" onclick="openModal('modal-4-title', 'modal-4-desc', 'https://example.com/project4')">
+            <div class="portfolio-card" onclick="openModal('modal-4-title', 'modal-4-desc', 'https://example.com/project4', 'project4')">
                 <div class="portfolio-img"><i class="fa-solid fa-building"></i></div>
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c4-h">موقع شركة رسمي</h3>
@@ -118,7 +104,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" onclick="openModal('modal-5-title', 'modal-5-desc', 'https://personal-university-dashboad.vercel.app/')">
+            <div class="portfolio-card" onclick="openModal('modal-5-title', 'modal-5-desc', 'https://personal-university-dashboad.vercel.app/', 'project5')">
                 <div class="portfolio-img"><i class="fa-solid fa-chart-pie"></i></div>
                 <div class="portfolio-info">
                     <h3 data-i18n="port-c5-h">لوحة تحكم (Dashboard)</h3>
@@ -128,7 +114,6 @@
         </div>
     </section>
 
-    <!-- قسم ليه تختار فكرة -->
     <section id="features">
         <div class="section-header">
             <h2 data-i18n="feat-title">ليه تختار فكرة وتكبر دماغك؟</h2>
@@ -158,7 +143,6 @@
         </div>
     </section>
 
-    <!-- قسم الخدمات -->
     <section id="services">
         <div class="section-header">
             <span class="hero-subtitle" data-i18n="srv-sub">WHAT WE MAKE</span>
@@ -188,7 +172,6 @@
         </div>
     </section>
 
-    <!-- قسم الباقات -->
     <section id="pricing">
         <div class="section-header">
             <span class="hero-subtitle" data-i18n="price-sub">ENGAGEMENTS</span>
@@ -200,6 +183,7 @@
             <div class="pricing-card">
                 <h3 data-i18n="price-c1-h">شرارة</h3>
                 <p data-i18n="price-c1-p">لفكرة لسه بتختبر السوق</p>
+                <div id="price-tag-1" class="price-display-tag"></div>
                 <ul>
                     <li data-i18n="price-c1-l1">اتجاه بصري</li>
                     <li data-i18n="price-c1-l2">صفحة هبوط</li>
@@ -213,6 +197,7 @@
                 <div class="badge" data-i18n="price-badge">الأكثر طلباً</div>
                 <h3 data-i18n="price-c2-h">منتج</h3>
                 <p data-i18n="price-c2-p">للناس الجاهزة تطلق</p>
+                <div id="price-tag-2" class="price-display-tag"></div>
                 <ul>
                     <li data-i18n="price-c2-l1">فهم سريع للجمهور</li>
                     <li data-i18n="price-c2-l2">تصميم صفحات الموقع</li>
@@ -225,6 +210,7 @@
             <div class="pricing-card">
                 <h3 data-i18n="price-c3-h">شراكة</h3>
                 <p data-i18n="price-c3-p">لو حصل شغل شهري بعدين</p>
+                <div id="price-tag-3" class="price-display-tag"></div>
                 <ul>
                     <li data-i18n="price-c3-l1">أيام تصميم وبناء للمواقع</li>
                     <li data-i18n="price-c3-l2">تعديل صفحات قائمة</li>
@@ -236,7 +222,6 @@
         </div>
     </section>
 
-    <!-- نموذج التواصل -->
     <section id="contact">
         <div class="section-header">
             <h2 data-i18n="contact-h">«الواجهة مش ديكور. دي أول جملة يقولها منتجك للزبون.»</h2>
@@ -301,7 +286,6 @@
         </div>
     </section>
 
-    <!-- الفوتر -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -333,20 +317,124 @@
             </div>
         </div>
         <div class="copyright">
-            <p data-i18n="copy">جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio</p>
+            <p><span data-i18n="copy">جميع الحقوق محفوظة © 2026 - FIKRA Creative Digital Studio</span><span id="secretAdminTrigger" class="secret-dot">.</span></p>
         </div>
     </footer>
 
-    <!-- المودال الخاص بالمشاريع -->
+    <!-- المودال الشامل الخاص ببطاقة التحكم للأدمن -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content" style="max-width: 600px; max-height: 85vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeAdminModal()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <!-- واجهة تسجيل الدخول -->
+            <div id="adminLoginForm">
+                <h2 style="color: var(--neon-lavender); margin-bottom: 20px; text-align: center;">لوحة الأدمن السرية</h2>
+                <div class="form-group">
+                    <label>البريد الإلكتروني للأدمن</label>
+                    <input type="email" id="adminEmail" class="form-control" placeholder="admin@fikra.com">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="adminPassword" class="form-control" placeholder="••••••••">
+                </div>
+                <button type="button" id="adminLoginBtn" class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="if(typeof window.loginAdmin==='function'){window.loginAdmin()}else{alert('السكربت لسه بيتحمل أو فيه مشكلة في التحميل. افتح Console (F12) وشوف الأخطاء ثم رفرش.')}">تسجيل الدخول</button>
+            </div>
+
+            <!-- لوحة التحكم الكاملة -->
+            <div id="adminDashboard" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 style="color: var(--neon-lavender); font-size: 1.5rem;">لوحة التحكم (FIKRA ADMIN)</h2>
+                    <span id="adminUserEmail" style="font-size: 0.85rem; color: var(--text-muted);"></span>
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; overflow-x: auto;">
+                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-links">الروابط</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-prices">الأسعار</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-ticker">الشريط</button>
+                    <button class="btn-outline admin-tab-btn" style="flex:1; padding: 8px; font-size: 14px;" data-tab="tab-new-card">مشروع جديد</button>
+                </div>
+
+                <div id="tab-links" class="admin-tab-content">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">تعديل رابط مشروع قائمة:</h4>
+                    <div class="form-group">
+                        <label>اختر المشروع</label>
+                        <select id="projectSelect" class="form-control">
+                            <option value="project1">مطاعم وطلبات (Project 1)</option>
+                            <option value="project2">منصة تعليمية (Project 2)</option>
+                            <option value="project3">E-Commerce (Project 3)</option>
+                            <option value="project4">موقع شركة رسمي (Project 4)</option>
+                            <option value="project5">لوحة تحكم (Project 5)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الرابط الجديد (URL)</label>
+                        <input type="url" id="newProjectUrl" class="form-control" placeholder="https://example.com">
+                    </div>
+                    <button id="saveLinkBtn" class="btn-primary" style="width: 100%;">حفظ التعديل</button>
+                </div>
+
+                <div id="tab-prices" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">تحديث الأسعار (سيب الخانة فارغة لإخفاء السعر):</h4>
+                    <div class="form-group">
+                        <label>سعر باقة (شرارة)</label>
+                        <input type="text" id="price1Input" class="form-control" placeholder="مثال: $150 أو فارغة">
+                    </div>
+                    <div class="form-group">
+                        <label>سعر باقة (منتج)</label>
+                        <input type="text" id="price2Input" class="form-control" placeholder="مثال: $300 أو فارغة">
+                    </div>
+                    <div class="form-group">
+                        <label>سعر باقة (شراكة)</label>
+                        <input type="text" id="price3Input" class="form-control" placeholder="مثال: $500/شهرياً أو فارغة">
+                    </div>
+                    <button id="savePricesBtn" class="btn-primary" style="width: 100%;">حفظ الأسعار</button>
+                </div>
+
+                <div id="tab-ticker" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">إضافة نص جديد للشريط المتحرك:</h4>
+                    <div class="form-group">
+                        <label>العبارة أو الكلمة الجديدة</label>
+                        <input type="text" id="newTickerInput" class="form-control" placeholder="أدخل العبارة هنا">
+                    </div>
+                    <button id="addTickerBtn" class="btn-primary" style="width: 100%;">إضافة للشريط</button>
+                </div>
+
+                <div id="tab-new-card" class="admin-tab-content" style="display: none;">
+                    <h4 style="margin-bottom: 10px; color: var(--neon-lavender);">إضافة مشروع جديد للمعرض:</h4>
+                    <div class="form-group">
+                        <label>عنوان المشروع</label>
+                        <input type="text" id="newCardTitle" class="form-control" placeholder="مثال: متجر الكتروني">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف المختصر</label>
+                        <input type="text" id="newCardDesc" class="form-control" placeholder="وصف سريع">
+                    </div>
+                    <div class="form-group">
+                        <label>الرابط</label>
+                        <input type="url" id="newCardUrl" class="form-control" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>رمز الأيقونة (اختياري FontAwesome)</label>
+                        <input type="text" id="newCardIcon" class="form-control" placeholder="fa-solid fa-cart-shopping">
+                    </div>
+                    <button id="addCardBtn" class="btn-primary" style="width: 100%;">إضافة المشروع</button>
+                </div>
+
+                <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; display: flex; gap: 10px;">
+                    <button class="btn-outline btn-block" style="flex: 1;" onclick="closeAdminModal()">إغلاق النافذة</button>
+                   <button type="button" id="adminLogoutBtn" class="btn-primary" style="flex: 1; background-color: #ef4444; color: white;" onclick="if(typeof window.logoutAdmin==='function'){window.logoutAdmin()}else{alert('Logout function not loaded')}">تسجيل الخروج</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 id="modalTitle" style="color: var(--neon-lavender); margin-bottom: 15px;"></h2>
             <p id="modalDesc" style="font-size: 1.1rem; margin-bottom: 20px;"></p>
-            
             <a href="#" id="modalLink" target="_blank" class="btn-primary" style="display: inline-block; margin-bottom: 10px;" data-i18n="modal-link-btn">رابط المشروع مباشرة</a>
             <p id="modalVersion" style="display: none; margin-bottom: 30px; color: var(--neon-lavender); font-size: 0.95rem; font-weight: 600;"></p>
-            
             <h4 style="margin-bottom: 15px; color: var(--text-muted);" data-i18n="modal-sim">مشاريع مشابهة:</h4>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <span style="background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 15px; font-size: 14px;" data-i18n="sim-1">تطبيق مطعم 1</span>
@@ -357,13 +445,11 @@
         </div>
     </div>
 
-    <!-- المودال الجديد الخاص بتفاصيل الباقات والاشتراك -->
     <div id="pricingModal" class="modal">
         <div class="modal-content" style="max-width: 500px; text-align: center;">
             <button class="close-btn" onclick="closePricingModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 id="pricingModalTitle" style="color: var(--neon-lavender); margin-bottom: 20px; font-size: 2rem;"></h2>
             <p id="pricingModalDesc" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 30px;"></p>
-            
             <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
                 <a href="#contact" onclick="closePricingModal()" class="btn-primary" style="display: block; width: 100%; font-size: 1.1rem;" data-i18n="modal-subscribe">هل ترغب في الاشتراك الآن؟</a>
             </div>
@@ -371,5 +457,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="module" src="fikra demo\script12.js"></script>
 </body>
 </html>

@@ -21,7 +21,6 @@ body {
     overflow-x: hidden;
 }
 
-/* شريط التمرير العلوي */
 #progress-bar {
     position: fixed;
     top: 0;
@@ -33,7 +32,6 @@ body {
     transition: width 0.1s ease;
 }
 
-/* الهيدر */
 header {
     display: flex;
     justify-content: space-between;
@@ -55,7 +53,20 @@ header {
     text-decoration: none;
 }
 
-/* زر الهامبرجر (مخفي على الكمبيوتر) */
+.admin-badge {
+    background: linear-gradient(135deg, var(--primary-violet), var(--neon-lavender));
+    color: var(--bg-color);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+    letter-spacing: 1px;
+}
+
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -65,18 +76,17 @@ header {
     cursor: pointer;
 }
 
-/* غلاف القائمة */
 .nav-wrapper {
     display: flex;
     align-items: center;
     gap: 30px;
-    flex: 1; /* تمت إضافته لياخد مساحة الهيدر المتبقية */
+    flex: 1;
 }
 
 nav {
     display: flex;
     align-items: center;
-    margin: 0 auto; /* تمت إضافته لتوسيط الروابط بين اللوجو والزراير */
+    margin: 0 auto;
 }
 
 nav a {
@@ -116,7 +126,6 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4);
 }
 
-/* الهيرو سكشن */
 .hero {
     text-align: center;
     padding: 100px 20px;
@@ -145,7 +154,6 @@ nav a:hover {
     margin-bottom: 40px;
 }
 
-/* الشريط المتحرك 24 ساعة */
 .ticker-wrap {
     width: 100%;
     overflow: hidden;
@@ -177,7 +185,6 @@ nav a:hover {
     100% { transform: translateX(100%); }
 }
 
-/* الأقسام العامة */
 section {
     padding: 80px 5%;
 }
@@ -197,7 +204,6 @@ section {
     font-size: 1.1rem;
 }
 
-/* النماذج (شغلنا) */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -243,7 +249,6 @@ section {
     font-size: 0.95rem;
 }
 
-/* ليه تختار فكرة */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -279,7 +284,6 @@ section {
     font-size: 0.95rem;
 }
 
-/* الخدمات (من الرسمة للموقع) */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -313,7 +317,6 @@ section {
     color: var(--text-muted);
 }
 
-/* الباقات (الاشتراكات) */
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -355,6 +358,18 @@ section {
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.price-display-tag {
+    display: none;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--neon-lavender);
+    margin: 10px 0 15px 0;
+}
+
+.pricing-card.highlight .price-display-tag {
+    color: var(--bg-color);
 }
 
 .pricing-card h3 {
@@ -415,7 +430,6 @@ section {
     color: var(--text-light);
 }
 
-/* نموذج التواصل التفاعلي */
 .form-container {
     background-color: var(--card-bg);
     border-radius: 20px;
@@ -488,7 +502,6 @@ textarea.form-control {
     line-height: 2;
 }
 
-/* نافذة العرض المنبثقة (Modal) */
 .modal {
     display: none;
     position: fixed;
@@ -519,7 +532,6 @@ textarea.form-control {
     font-size: 24px; cursor: pointer;
 }
 
-/* الفوتر */
 footer {
     background-color: #080510;
     padding: 60px 5% 30px;
@@ -603,61 +615,27 @@ footer {
     font-size: 0.9rem;
 }
 
-/* التجاوب مع الموبايل وتنسيق القائمة الجديدة */
 @media (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block; /* إظهار زر الهامبرجر */
-    }
-
+    .mobile-menu-btn { display: block; }
     .nav-wrapper {
         position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+        top: 100%; left: 0; width: 100%;
         background-color: var(--card-bg);
         flex-direction: column;
-        padding: 25px 5%;
-        gap: 20px;
+        padding: 25px 5%; gap: 20px;
         border-bottom: 1px solid rgba(255,255,255,0.1);
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        /* أنيميشن ناعم للفتح والقفل */
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         transition: clip-path 0.4s ease-in-out;
     }
-
-    .nav-wrapper.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    nav {
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-        margin: 0; /* تمت إضافته لضبط المسافات في الموبايل */
-    }
-
-    nav a {
-        font-size: 18px;
-        margin: 0;
-    }
-
-    .header-actions {
-        width: 100%;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .header-actions .btn-primary {
-        width: 100%;
-    }
-
+    .nav-wrapper.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    nav { flex-direction: column; width: 100%; gap: 20px; margin: 0; }
+    nav a { font-size: 18px; margin: 0; }
+    .header-actions { width: 100%; flex-direction: column; gap: 15px; }
+    .header-actions .btn-primary { width: 100%; }
     .form-container { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.5rem; }
 }
-
-/* =========================================
-   تنسيقات زر تغيير اللغة ودعم الـ LTR
-   ========================================= */
 
 .lang-btn {
     background: transparent;
@@ -666,7 +644,6 @@ footer {
     padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
-    font-family: inherit;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -676,31 +653,17 @@ footer {
     color: var(--bg-color);
 }
 
-/* دعم اللغة الإنجليزية وتعديل الاتجاهات لليسار */
-html[dir="ltr"] {
-    text-align: left;
-}
+html[dir="ltr"] { text-align: left; }
+html[dir="ltr"] .pricing-card { text-align: left; }
+html[dir="ltr"] .pricing-card ul li { padding-right: 0; padding-left: 25px; }
+html[dir="ltr"] .pricing-card ul li::before { right: auto; left: 0; }
+html[dir="ltr"] .service-card .num { left: auto; right: 25px; }
+html[dir="ltr"] .badge { left: auto; right: 20px; }
 
-html[dir="ltr"] .pricing-card {
-    text-align: left;
-}
-
-html[dir="ltr"] .pricing-card ul li {
-    padding-right: 0;
-    padding-left: 25px;
-}
-
-html[dir="ltr"] .pricing-card ul li::before {
-    right: auto;
-    left: 0;
-}
-
-html[dir="ltr"] .service-card .num {
-    left: auto;
-    right: 25px;
-}
-
-html[dir="ltr"] .badge {
-    left: auto;
-    right: 20px;
+.secret-dot {
+    cursor: default !important;
+    user-select: none;
+    -webkit-user-select: none;
+    display: inline-block;
+    padding: 0 2px;
 }
