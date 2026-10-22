@@ -20,7 +20,7 @@ setPersistence(auth, browserLocalPersistence).catch((err) => {
   console.error("Persistence error:", err);
 });
 
-// Translation Helper function using public API
+// Translation API Helper
 window.autoTrans = async function(sourceId, targetId) {
     const text = document.getElementById(sourceId).value;
     if (!text) return;
@@ -31,13 +31,8 @@ window.autoTrans = async function(sourceId, targetId) {
         const data = await res.json();
         if(data && data.responseData && data.responseData.translatedText) {
             target.value = data.responseData.translatedText;
-        } else {
-            target.value = text;
-        }
-    } catch(e) {
-        target.value = text;
-        console.error("Translation Error: ", e);
-    }
+        } else { target.value = text; }
+    } catch(e) { target.value = text; console.error("Error: ", e); }
 };
 
 window.loginAdmin = async function () {
@@ -45,10 +40,9 @@ window.loginAdmin = async function () {
   const passEl = document.getElementById("adminPassword");
   const loginBtn = document.getElementById("adminLoginBtn");
   if (!emailEl || !passEl) return;
-
   const email = emailEl.value.trim();
   const pass = passEl.value.trim();
-  if (!email || !pass) { alert("يرجى كتابة البريد الإلكتروني وكلمة المرور!"); return; }
+  if (!email || !pass) return alert("يرجى كتابة البريد الإلكتروني وكلمة المرور!");
 
   if (loginBtn) { loginBtn.disabled = true; loginBtn.style.opacity = "0.7"; loginBtn.innerText = "جاري الدخول..."; }
 
@@ -60,8 +54,7 @@ window.loginAdmin = async function () {
   } catch (err) {
     let msg = "حدث خطأ أثناء الدخول.";
     if (err.message === "TIMEOUT") msg = "انتهت مهلة الاتصال.";
-    else if (["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found", "auth/invalid-email"].includes(err.code)) msg = "بيانات غير صحيحة.";
-    else if (err.code === "auth/too-many-requests") msg = "تم حظر المحاولات مؤقتاً.";
+    else if (["auth/invalid-credential", "auth/wrong-password", "auth/user-not-found"].includes(err.code)) msg = "بيانات غير صحيحة.";
     alert(msg);
   } finally {
     if (loginBtn) { loginBtn.disabled = false; loginBtn.style.opacity = "1"; loginBtn.innerText = "تسجيل الدخول"; }
@@ -77,7 +70,6 @@ window.logoutAdmin = async function () {
   } catch (err) { alert("حصل خطأ أثناء الخروج"); }
 };
 
-// Switch between Create and Edit modes
 window.switchAdminMode = function(mode) {
     const createContainer = document.getElementById('create-mode-container');
     const editContainer = document.getElementById('edit-mode-container');
@@ -89,28 +81,17 @@ window.switchAdminMode = function(mode) {
     if(mode === 'create') {
         createContainer.style.display = 'block';
         editContainer.style.display = 'none';
-        
-        createBtn.className = 'btn-primary';
-        createBtn.style.border = 'none';
-        
-        editBtn.className = 'btn-outline';
-        editBtn.style.border = '1px solid var(--neon-lavender)';
-        editBtn.style.color = 'white';
-
-        window.showAdminTab('tab-new-card'); // default create
+        createBtn.className = 'btn-primary'; createBtn.style.border = 'none';
+        editBtn.className = 'btn-outline'; editBtn.style.border = '1px solid var(--neon-lavender)'; editBtn.style.color = 'white';
+        window.showAdminTab('tab-new-card'); 
     } else {
         createContainer.style.display = 'none';
         editContainer.style.display = 'block';
-        
-        createBtn.className = 'btn-outline';
-        createBtn.style.border = '1px solid var(--neon-lavender)';
-        createBtn.style.color = 'white';
-        
-        editBtn.className = 'btn-primary';
-        editBtn.style.border = 'none';
-        
+        createBtn.className = 'btn-outline'; createBtn.style.border = '1px solid var(--neon-lavender)'; createBtn.style.color = 'white';
+        editBtn.className = 'btn-primary'; editBtn.style.border = 'none';
         window.populateEditDropdowns();
-        window.showAdminTab('tab-links'); // default edit
+        window.populateTickerManager();
+        window.showAdminTab('tab-edit-texts'); 
     }
 };
 
@@ -119,57 +100,45 @@ window.forceBindButtons = function () {
   if (loginBtn) {
     const newLoginBtn = loginBtn.cloneNode(true);
     loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
-    newLoginBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.loginAdmin(); });
+    newLoginBtn.addEventListener("click", (e) => { e.preventDefault(); window.loginAdmin(); });
   }
 
   const logoutBtn = document.getElementById("adminLogoutBtn");
   if (logoutBtn) {
     const newLogoutBtn = logoutBtn.cloneNode(true);
     logoutBtn.parentNode.replaceChild(newLogoutBtn, logoutBtn);
-    newLogoutBtn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); window.logoutAdmin(); });
+    newLogoutBtn.addEventListener("click", (e) => { e.preventDefault(); window.logoutAdmin(); });
   }
 
   const bindClick = (id, fn) => {
     const el = document.getElementById(id);
-    if (el && typeof fn === "function") {
-      el.onclick = null;
-      el.addEventListener("click", (e) => { e.preventDefault(); fn(); });
-    }
+    if (el && typeof fn === "function") { el.onclick = null; el.addEventListener("click", (e) => { e.preventDefault(); fn(); }); }
   };
 
   bindClick("saveLinkBtn", window.saveProjectUrl);
   bindClick("savePricesBtn", window.savePrices);
   bindClick("addTickerBtn", window.addTickerItem);
   bindClick("addCardBtn", window.addNewPortfolioCard);
-  
   bindClick("addFeatureBtn", window.addCustomFeature);
   bindClick("addServiceBtn", window.addCustomService);
   bindClick("addPackageBtn", window.addCustomPackage);
 
-  const projectSelect = document.getElementById("projectSelect");
-  if (projectSelect) {
-    projectSelect.onchange = null;
-    projectSelect.addEventListener("change", window.loadCurrentProjectUrl);
-  }
-
   document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
     btn.onclick = null;
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const tabId = e.currentTarget.getAttribute("data-tab");
-      if (tabId) window.showAdminTab(tabId);
-    });
+    btn.addEventListener("click", (e) => { e.preventDefault(); const tabId = e.currentTarget.getAttribute("data-tab"); if (tabId) window.showAdminTab(tabId); });
   });
 };
 
 window.siteData = {
   projectUrls: { project1: "", project2: "", project3: "", project4: "", project5: "" },
   prices: { price1: "", price2: "", price3: "" },
-  tickerItems: ["موبايل أولاً", "UI / UX", "من الفكرة للصفحة", "FIKRA", "ويب ديزاين", "فرونت إند", "صفحات هبوط"],
+  tickerItemsArray: [], // New structured format [{id, ar, en, visible}]
   customCards: [],
   customFeatures: [],
   customServices: [],
-  customPackages: []
+  customPackages: [],
+  siteTexts: {}, // For overriding texts like hero-title
+  origProjects: {} // Overrides for orig 5 projects
 };
 
 async function loadSiteData() {
@@ -178,8 +147,21 @@ async function loadSiteData() {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       window.siteData = { ...window.siteData, ...docSnap.data() };
+      
+      // Migration for old ticker array if it exists
+      if(window.siteData.tickerItems && !window.siteData.tickerItemsArray) {
+          window.siteData.tickerItemsArray = window.siteData.tickerItems.map(t => ({id: Date.now()+Math.random(), ar: t, en: t, visible: true}));
+      }
+      if(!window.siteData.tickerItemsArray || window.siteData.tickerItemsArray.length === 0) {
+          const def = ["موبايل أولاً", "UI / UX", "من الفكرة للصفحة", "FIKRA", "ويب ديزاين", "فرونت إند", "صفحات هبوط"];
+          const defEn = ["Mobile First", "UI / UX", "Idea to Page", "FIKRA", "Web Design", "Front End", "Landing Pages"];
+          window.siteData.tickerItemsArray = def.map((t,i) => ({id: Date.now()+i, ar: t, en: defEn[i], visible: true}));
+      }
+      
     }
-  } catch (err) { console.log("Using default data", err); }
+  } catch (err) { console.log("Using default data"); }
+  
+  if(typeof window.reRenderTexts === 'function') window.reRenderTexts();
   renderAllData();
 }
 
@@ -190,26 +172,94 @@ window.showAdminTab = function (tabId) {
 };
 
 // ---------------------------------------------------------------------------------
-// Edit Logic
+// New Editing Logic (Site Texts, Orig Projects, Custom Items toggles)
 // ---------------------------------------------------------------------------------
+
+// Edit Site Texts
+window.loadEditText = function() {
+    const key = document.getElementById("textKeySelect").value;
+    if(!key) return;
+    
+    // Check if overridden, else get default from UI
+    if(window.siteData.siteTexts && window.siteData.siteTexts[key]) {
+        document.getElementById("textArVal").value = window.siteData.siteTexts[key].ar || "";
+        document.getElementById("textEnVal").value = window.siteData.siteTexts[key].en || "";
+    } else {
+        if(window.translations) {
+            document.getElementById("textArVal").value = window.translations.ar[key] || "";
+            document.getElementById("textEnVal").value = window.translations.en[key] || "";
+        }
+    }
+};
+
+window.saveEditText = async function() {
+    const key = document.getElementById("textKeySelect").value;
+    if(!key) return alert("اختر نص أولاً!");
+    
+    if(!window.siteData.siteTexts) window.siteData.siteTexts = {};
+    window.siteData.siteTexts[key] = {
+        ar: document.getElementById("textArVal").value.trim(),
+        en: document.getElementById("textEnVal").value.trim()
+    };
+    
+    if(typeof window.reRenderTexts === 'function') window.reRenderTexts();
+    await saveDataToFirestore("تم تحديث النص الأساسي بنجاح!");
+};
+
+// Edit Orig Projects (1-5)
+window.loadEditOrigProject = function() {
+    const pKey = document.getElementById("origProjectSelect").value;
+    if(!pKey) return;
+    
+    if(!window.siteData.origProjects) window.siteData.origProjects = {};
+    let op = window.siteData.origProjects[pKey];
+    
+    // Extract ID num for default translation keys
+    let num = pKey.replace('project', '');
+    
+    document.getElementById("origProjVisible").checked = op && op.visible === false ? false : true;
+    
+    document.getElementById("origProjArTitle").value = op && op.arTitle ? op.arTitle : (window.translations.ar[`port-c${num}-h`]||"");
+    document.getElementById("origProjEnTitle").value = op && op.enTitle ? op.enTitle : (window.translations.en[`port-c${num}-h`]||"");
+    
+    document.getElementById("origProjArDesc").value = op && op.arDesc ? op.arDesc : (window.translations.ar[`modal-${num}-desc`]||"");
+    document.getElementById("origProjEnDesc").value = op && op.enDesc ? op.enDesc : (window.translations.en[`modal-${num}-desc`]||"");
+    
+    document.getElementById("origProjUrl").value = op && op.url ? op.url : (window.siteData.projectUrls[pKey]||"");
+};
+
+window.saveEditOrigProject = async function() {
+    const pKey = document.getElementById("origProjectSelect").value;
+    if(!pKey) return alert("اختر مشروع أولاً");
+    
+    if(!window.siteData.origProjects) window.siteData.origProjects = {};
+    window.siteData.origProjects[pKey] = {
+        visible: document.getElementById("origProjVisible").checked,
+        arTitle: document.getElementById("origProjArTitle").value.trim(),
+        enTitle: document.getElementById("origProjEnTitle").value.trim(),
+        arDesc: document.getElementById("origProjArDesc").value.trim(),
+        enDesc: document.getElementById("origProjEnDesc").value.trim(),
+        url: document.getElementById("origProjUrl").value.trim()
+    };
+    
+    if(typeof window.reRenderTexts === 'function') window.reRenderTexts();
+    await saveDataToFirestore("تم تحديث إعدادات المشروع الأساسي بنجاح!");
+};
+
+// Edit Custom Items Logic
 window.populateEditDropdowns = function() {
     const cardSelect = document.getElementById('editCardSelect');
     if(cardSelect) {
         cardSelect.innerHTML = '<option value="">-- اختر نموذج --</option>';
         if(window.siteData.customCards) {
-            window.siteData.customCards.forEach(c => {
-                cardSelect.innerHTML += `<option value="${c.id}">${c.title}</option>`;
-            });
+            window.siteData.customCards.forEach(c => cardSelect.innerHTML += `<option value="${c.id}">${c.title}</option>`);
         }
     }
-
     const pkgSelect = document.getElementById('editPkgSelect');
     if(pkgSelect) {
         pkgSelect.innerHTML = '<option value="">-- اختر باقة --</option>';
         if(window.siteData.customPackages) {
-            window.siteData.customPackages.forEach(p => {
-                pkgSelect.innerHTML += `<option value="${p.id}">${p.ar.title}</option>`;
-            });
+            window.siteData.customPackages.forEach(p => pkgSelect.innerHTML += `<option value="${p.id}">${p.ar.title}</option>`);
         }
     }
 };
@@ -219,6 +269,7 @@ window.loadEditCard = function() {
     if(!id) return;
     const card = window.siteData.customCards.find(c => c.id == id);
     if(card) {
+        document.getElementById("editCardVisible").checked = card.visible !== false;
         document.getElementById("editCardTitle").value = card.title;
         document.getElementById("editCardDesc").value = card.desc;
         document.getElementById("editCardUrl").value = card.url;
@@ -229,9 +280,9 @@ window.loadEditCard = function() {
 window.saveEditCard = async function() {
     const id = document.getElementById("editCardSelect").value;
     if(!id) return alert("اختر نموذج أولاً");
-    
     const index = window.siteData.customCards.findIndex(c => c.id == id);
     if(index > -1) {
+        window.siteData.customCards[index].visible = document.getElementById("editCardVisible").checked;
         window.siteData.customCards[index].title = document.getElementById("editCardTitle").value.trim();
         window.siteData.customCards[index].desc = document.getElementById("editCardDesc").value.trim();
         window.siteData.customCards[index].url = document.getElementById("editCardUrl").value.trim();
@@ -240,11 +291,22 @@ window.saveEditCard = async function() {
     }
 };
 
+window.deleteCustomCard = async function() {
+    const id = document.getElementById("editCardSelect").value;
+    if(!id) return alert("اختر نموذج أولاً");
+    if(confirm("متأكد من حذف هذا النموذج نهائياً؟")) {
+        window.siteData.customCards = window.siteData.customCards.filter(c => c.id != id);
+        window.populateEditDropdowns();
+        await saveDataToFirestore("تم حذف النموذج!");
+    }
+}
+
 window.loadEditPkg = function() {
     const id = document.getElementById("editPkgSelect").value;
     if(!id) return;
     const pkg = window.siteData.customPackages.find(p => p.id == id);
     if(pkg) {
+        document.getElementById("editPkgVisible").checked = pkg.visible !== false;
         document.getElementById("editPkgArTitle").value = pkg.ar.title;
         document.getElementById("editPkgEnTitle").value = pkg.en.title;
         document.getElementById("editPkgArSub").value = pkg.ar.sub;
@@ -260,9 +322,9 @@ window.loadEditPkg = function() {
 window.saveEditPkg = async function() {
     const id = document.getElementById("editPkgSelect").value;
     if(!id) return alert("اختر باقة أولاً");
-    
     const index = window.siteData.customPackages.findIndex(p => p.id == id);
     if(index > -1) {
+        window.siteData.customPackages[index].visible = document.getElementById("editPkgVisible").checked;
         window.siteData.customPackages[index].ar.title = document.getElementById("editPkgArTitle").value.trim();
         window.siteData.customPackages[index].en.title = document.getElementById("editPkgEnTitle").value.trim();
         window.siteData.customPackages[index].ar.sub = document.getElementById("editPkgArSub").value.trim();
@@ -276,55 +338,97 @@ window.saveEditPkg = async function() {
     }
 };
 
+window.deleteCustomPkg = async function() {
+    const id = document.getElementById("editPkgSelect").value;
+    if(!id) return alert("اختر باقة أولاً");
+    if(confirm("متأكد من حذف الباقة نهائياً؟")) {
+        window.siteData.customPackages = window.siteData.customPackages.filter(p => p.id != id);
+        window.populateEditDropdowns();
+        await saveDataToFirestore("تم حذف الباقة!");
+    }
+}
+
 // ---------------------------------------------------------------------------------
-// Hardcoded Values Editing
+// Ticker Management Logic
 // ---------------------------------------------------------------------------------
-window.loadCurrentProjectUrl = function () {
-  const select = document.getElementById("projectSelect");
-  const input = document.getElementById("newProjectUrl");
-  if (select && input && window.siteData.projectUrls) {
-    input.value = window.siteData.projectUrls[select.value] || "";
-  }
-};
-
-window.saveProjectUrl = async function () {
-  const select = document.getElementById("projectSelect");
-  const input = document.getElementById("newProjectUrl");
-  if (!select || !input) return;
-  window.siteData.projectUrls[select.value] = input.value.trim();
-  await saveDataToFirestore("تم حفظ التعديل للرابط بنجاح!");
-};
-
-window.savePrices = async function () {
-  window.siteData.prices = {
-    price1: (document.getElementById("price1Input") || {}).value?.trim() || "",
-    price2: (document.getElementById("price2Input") || {}).value?.trim() || "",
-    price3: (document.getElementById("price3Input") || {}).value?.trim() || ""
-  };
-  await saveDataToFirestore("تم تحديث الأسعار بنجاح!");
-};
-
 window.addTickerItem = async function () {
-  const input = document.getElementById("newTickerInput");
-  const text = input ? input.value.trim() : "";
-  if (!text) return;
-  if (!window.siteData.tickerItems) window.siteData.tickerItems = [];
-  window.siteData.tickerItems.push(text);
-  if (input) input.value = "";
+  const ar = document.getElementById("newTickerAr").value.trim();
+  const en = document.getElementById("newTickerEn").value.trim() || ar;
+  if (!ar) return alert("اكتب العبارة بالعربي على الأقل!");
+  
+  if (!window.siteData.tickerItemsArray) window.siteData.tickerItemsArray = [];
+  window.siteData.tickerItemsArray.push({ id: Date.now(), ar, en, visible: true });
+  
+  document.getElementById("newTickerAr").value = "";
+  document.getElementById("newTickerEn").value = "";
+  
   await saveDataToFirestore("تمت إضافة العبارة للشريط بنجاح!");
 };
 
+window.populateTickerManager = function() {
+    const list = document.getElementById("tickerManageList");
+    if(!list) return;
+    list.innerHTML = "";
+    if(!window.siteData.tickerItemsArray) return;
+    
+    window.siteData.tickerItemsArray.forEach(t => {
+        let div = document.createElement("div");
+        div.className = "ticker-item-manage";
+        div.innerHTML = `
+            <div style="flex:1;">
+                <p style="margin:0; font-size:14px; font-weight:bold; color:var(--text-light);">${t.ar}</p>
+                <p style="margin:0; font-size:12px; color:var(--text-muted);">${t.en}</p>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="checkbox" onchange="window.toggleTickerItem(${t.id}, this.checked)" ${t.visible ? 'checked' : ''}> ظاهر
+                <button class="btn-outline" style="padding:4px 10px; border-color:#ef4444; color:#ef4444;" onclick="window.deleteTickerItem(${t.id})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+        list.appendChild(div);
+    });
+}
+
+window.toggleTickerItem = async function(id, state) {
+    const idx = window.siteData.tickerItemsArray.findIndex(t => t.id == id);
+    if(idx > -1) {
+        window.siteData.tickerItemsArray[idx].visible = state;
+        await saveDataToFirestore("تم تعديل حالة الظهور للشريط");
+    }
+}
+window.deleteTickerItem = async function(id) {
+    if(confirm("حذف العبارة من الشريط؟")) {
+        window.siteData.tickerItemsArray = window.siteData.tickerItemsArray.filter(t => t.id != id);
+        window.populateTickerManager();
+        await saveDataToFirestore("تم الحذف من الشريط");
+    }
+}
+
+window.renderTicker = function() {
+    const container = document.getElementById("tickerContainer");
+    if (container && window.siteData.tickerItemsArray) {
+        let html = "";
+        const lang = document.documentElement.getAttribute("lang") || "ar";
+        const visibleItems = window.siteData.tickerItemsArray.filter(t => t.visible !== false);
+        
+        [...visibleItems, ...visibleItems, ...visibleItems].forEach((item) => {
+            let txt = lang === 'ar' ? item.ar : item.en;
+            html += `<div class="ticker-item">${txt}</div>`;
+        });
+        container.innerHTML = html;
+    }
+}
+
 // ---------------------------------------------------------------------------------
-// Adding New Custom Data
+// Adding New Custom Data (Features, Services, Packages)
 // ---------------------------------------------------------------------------------
 window.addNewPortfolioCard = async function () {
   const title = (document.getElementById("newCardTitle") || {}).value?.trim() || "";
   const desc = (document.getElementById("newCardDesc") || {}).value?.trim() || "";
   const url = (document.getElementById("newCardUrl") || {}).value?.trim() || "";
   const icon = (document.getElementById("newCardIcon") || {}).value?.trim() || "";
-  if (!title || !url) return alert("يرجى إدخال العنوان والرابط على الأقل");
+  if (!title) return alert("يرجى إدخال العنوان");
   if (!window.siteData.customCards) window.siteData.customCards = [];
-  window.siteData.customCards.push({ id: Date.now(), title, desc, url, icon: icon || "fa-solid fa-globe" });
+  window.siteData.customCards.push({ id: Date.now(), title, desc, url, icon: icon || "fa-solid fa-globe", visible: true });
   ["newCardTitle", "newCardDesc", "newCardUrl", "newCardIcon"].forEach(id => { const el = document.getElementById(id); if(el) el.value = ""; });
   await saveDataToFirestore("تمت إضافة المشروع الجديد بنجاح!");
 };
@@ -335,16 +439,10 @@ window.addCustomFeature = async function () {
   const arDesc = document.getElementById("featArDesc").value.trim();
   const enDesc = document.getElementById("featEnDesc").value.trim() || arDesc;
   const icon = document.getElementById("featIcon").value.trim() || "fa-solid fa-star";
-  
   if(!arTitle || !arDesc) return alert("يرجى إدخال العنوان والوصف بالعربي على الأقل!");
   
   if (!window.siteData.customFeatures) window.siteData.customFeatures = [];
-  window.siteData.customFeatures.push({
-      id: Date.now(), icon,
-      ar: { title: arTitle, desc: arDesc },
-      en: { title: enTitle, desc: enDesc }
-  });
-  
+  window.siteData.customFeatures.push({ id: Date.now(), icon, visible: true, ar: { title: arTitle, desc: arDesc }, en: { title: enTitle, desc: enDesc } });
   ["featArTitle","featEnTitle","featArDesc","featEnDesc","featIcon"].forEach(id => document.getElementById(id).value = "");
   await saveDataToFirestore("تمت إضافة الميزة بنجاح!");
 };
@@ -355,16 +453,10 @@ window.addCustomService = async function () {
   const arDesc = document.getElementById("srvArDesc").value.trim();
   const enDesc = document.getElementById("srvEnDesc").value.trim() || arDesc;
   const num = document.getElementById("srvNum").value.trim() || "05";
-  
   if(!arTitle || !arDesc) return alert("يرجى إدخال العنوان والوصف بالعربي على الأقل!");
   
   if (!window.siteData.customServices) window.siteData.customServices = [];
-  window.siteData.customServices.push({
-      id: Date.now(), num,
-      ar: { title: arTitle, desc: arDesc },
-      en: { title: enTitle, desc: enDesc }
-  });
-  
+  window.siteData.customServices.push({ id: Date.now(), num, visible: true, ar: { title: arTitle, desc: arDesc }, en: { title: enTitle, desc: enDesc } });
   ["srvArTitle","srvEnTitle","srvArDesc","srvEnDesc","srvNum"].forEach(id => document.getElementById(id).value = "");
   await saveDataToFirestore("تمت إضافة الخدمة بنجاح!");
 };
@@ -380,21 +472,20 @@ window.addCustomPackage = async function () {
   const enFeat = document.getElementById("pkgEnFeat").value.trim() || arFeat;
   const price = document.getElementById("pkgPrice").value.trim();
   
-  if(!arTitle || !arDesc || !arFeat) return alert("البيانات العربية الأساسية مطلوبة (اسم، وصف، مميزات)!");
+  if(!arTitle || !arDesc || !arFeat) return alert("البيانات العربية الأساسية مطلوبة!");
   
   if (!window.siteData.customPackages) window.siteData.customPackages = [];
   window.siteData.customPackages.push({
-      id: Date.now(), price,
+      id: Date.now(), price, visible: true,
       ar: { title: arTitle, sub: arSub, desc: arDesc, features: arFeat.split(',').map(f => f.trim()) },
       en: { title: enTitle, sub: enSub, desc: enDesc, features: enFeat.split(',').map(f => f.trim()) }
   });
-  
   ["pkgArTitle","pkgEnTitle","pkgArSub","pkgEnSub","pkgArDesc","pkgEnDesc","pkgArFeat","pkgEnFeat","pkgPrice"].forEach(id => document.getElementById(id).value = "");
-  await saveDataToFirestore("تمت إضافة الباقة بنجاح وسيظهر لها سهم خاص!");
+  await saveDataToFirestore("تمت إضافة الباقة بنجاح!");
 };
 
 // ---------------------------------------------------------------------------------
-// Save & Render Engine
+// Render Engine (Handles Visiblity Flags)
 // ---------------------------------------------------------------------------------
 async function saveDataToFirestore(msg) {
   try {
@@ -407,33 +498,27 @@ async function saveDataToFirestore(msg) {
 function renderAllData() {
   const currentLang = document.documentElement.getAttribute("lang") || "ar";
 
-  // Prices Setup
-  ["price1", "price2", "price3"].forEach((key, index) => {
-    const el = document.getElementById(`price-tag-${index + 1}`);
-    const val = window.siteData.prices ? window.siteData.prices[key] : "";
-    if (el) {
-      if (val && val.trim() !== "") { el.innerText = val; el.style.display = "block"; }
-      else { el.style.display = "none"; }
-    }
-  });
-
-  // Ticker Setup
-  const container = document.getElementById("tickerContainer");
-  if (container && window.siteData.tickerItems) {
-    let html = "";
-    [...window.siteData.tickerItems, ...window.siteData.tickerItems].forEach((item) => {
-      html += `<div class="ticker-item">${item}</div>`;
-    });
-    container.innerHTML = html;
+  // Orig Projects Visibility & Overrides
+  for(let i=1; i<=5; i++) {
+      let pKey = "project"+i;
+      let el = document.getElementById(`orig-project${i}`);
+      if(el) {
+          if(window.siteData.origProjects && window.siteData.origProjects[pKey] && window.siteData.origProjects[pKey].visible === false) {
+              el.style.display = 'none';
+          } else { el.style.display = 'block'; }
+      }
   }
 
-  // Projects / Portfolio Setup
+  // Ticker (Calls the dedicated function)
+  window.renderTicker();
+
+  // Projects / Portfolio Setup (Custom)
   const grid = document.getElementById("portfolioGrid");
   if (grid && window.siteData.customCards) {
-    // Clear previously injected custom cards to avoid duplicates on re-render
     document.querySelectorAll('.custom-card-injected').forEach(e => e.remove());
-    
     window.siteData.customCards.forEach((card) => {
+        if(card.visible === false) return; // Skip rendering if hidden
+        
         const cardDiv = document.createElement("div");
         cardDiv.className = "portfolio-card custom-card-injected";
         cardDiv.id = `custom-card-${card.id}`;
@@ -456,6 +541,7 @@ function renderAllData() {
   if(featGrid && window.siteData.customFeatures) {
       document.querySelectorAll('.custom-feature').forEach(e => e.remove());
       window.siteData.customFeatures.forEach(feat => {
+          if(feat.visible === false) return;
           const div = document.createElement('div');
           div.className = 'feature-card custom-feature';
           div.innerHTML = `
@@ -472,6 +558,7 @@ function renderAllData() {
   if(srvGrid && window.siteData.customServices) {
       document.querySelectorAll('.custom-service').forEach(e => e.remove());
       window.siteData.customServices.forEach(srv => {
+          if(srv.visible === false) return;
           const div = document.createElement('div');
           div.className = 'service-card custom-service';
           div.innerHTML = `
@@ -488,6 +575,7 @@ function renderAllData() {
   if(pkgGrid && window.siteData.customPackages) {
       document.querySelectorAll('.custom-pkg').forEach(e => e.remove());
       window.siteData.customPackages.forEach(pkg => {
+          if(pkg.visible === false) return;
           const div = document.createElement('div');
           div.className = 'pricing-card highlight custom-pkg';
           
@@ -506,15 +594,12 @@ function renderAllData() {
                   <span class="dynamic-lang" data-ar="تفاصيل (About)" data-en="Details (About)">${currentLang === 'ar' ? "تفاصيل (About)" : "Details (About)"}</span>
               </button>
           `;
-
-          // Append dynamic modal translations safely globally
-          if(typeof translations !== 'undefined') {
-              translations['ar'][`m-title-${pkg.id}`] = pkg.ar.title;
-              translations['ar'][`m-desc-${pkg.id}`] = pkg.ar.desc;
-              translations['en'][`m-title-${pkg.id}`] = pkg.en.title;
-              translations['en'][`m-desc-${pkg.id}`] = pkg.en.desc;
+          if(typeof window.translations !== 'undefined') {
+              window.translations['ar'][`m-title-${pkg.id}`] = pkg.ar.title;
+              window.translations['ar'][`m-desc-${pkg.id}`] = pkg.ar.desc;
+              window.translations['en'][`m-title-${pkg.id}`] = pkg.en.title;
+              window.translations['en'][`m-desc-${pkg.id}`] = pkg.en.desc;
           }
-
           pkgGrid.appendChild(div);
       });
   }
@@ -542,7 +627,6 @@ onAuthStateChanged(auth, (user) => {
       adminFirstNameEl.innerText = firstName;
       welcomeMsg.style.display = "inline-block";
     }
-    window.loadCurrentProjectUrl();
   } else {
     if (loginForm) loginForm.style.display = "block";
     if (dashboard) dashboard.style.display = "none";
@@ -561,4 +645,3 @@ if (document.readyState === "loading") { document.addEventListener("DOMContentLo
 else { initAdmin(); }
 
 setTimeout(window.forceBindButtons, 1000);
-setTimeout(window.forceBindButtons, 2500);

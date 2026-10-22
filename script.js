@@ -1,4 +1,4 @@
-const translations = {
+const defaultTranslations = {
     ar: {
         "page-title": "FIKRA - Creative Digital Studio",
         "nav-portfolio": "النماذج", "nav-features": "ليه إحنا؟", "nav-services": "الخدمات", "nav-pricing": "الباقات", "nav-contact": "تواصل مع فكرة",
@@ -7,7 +7,6 @@ const translations = {
         "hero-p2": "FIKRA هي الوسيط اللي يقربك لتفكير الزبون.", 
         "hero-p": "ويب ديزاين، وفرونت إند. بنرسم واجهة الموقع ونبنيها: صفحة واضحة، سريعة على الموبايل، والزبون يفهم من أول نظرة.",
         "hero-btn1": "ابدأ بفكرتك", "hero-btn2": "شوف أسلوب الشغل",
-        "ticker-1": "موبايل أولاً", "ticker-2": "UI / UX", "ticker-3": "من الفكرة للصفحة", "ticker-4": "FIKRA", "ticker-5": "ويب ديزاين", "ticker-6": "فرونت إند", "ticker-7": "صفحات هبوط",
         "port-sub": "SELECTED DIRECTIONS",
         "port-title": "أسلوب الشغل، مش شعارات مستعارة.",
         "port-p": "نماذج مواقع وواجهات. مش تطبيقات، ومش شعارات عملاء مستعارة. لما نشتغل على فكرتك، الاسم يبقى بتاعك.",
@@ -18,16 +17,8 @@ const translations = {
         "port-c5-h": "لوحة تحكم (Dashboard)", "port-c5-p": "صفحة تحكم ستاتيكية لعرض البيانات بوضوح.",
         "feat-title": "ليه تختار فكرة وتكبر دماغك؟",
         "feat-p": "إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.",
-        "feat-c1-h": "سرعة في الإنجاز", "feat-c1-p": "وقتك بفلوس، وإحنا بنقدر ده جداً. شغلنا بيخلص في ميعاده ومفيش حاجة اسمها بكرة.",
-        "feat-c2-h": "جودة بتنطق", "feat-c2-p": "مش بنسلمك مشروع إلا لو إحنا راضيين عنه 100%، الكود نظيف والتصميم مفيش زيه.",
-        "feat-c3-h": "إحنا شركائك", "feat-c3-p": "نجاح موقعك هو نجاحنا، بنفكر معاك وبنديك الخلاصة من خبرتنا في السوق.",
-        "feat-c4-h": "التواصل معاك مستمر", "feat-c4-p": "معاك على مدار الساعة.. لو قلقان من حاجة إحنا بنحلهالك في ساعتها قبل ما تستلم المشروع بتاعك منعا للتأجيلات وتاخير الفكره.",
         "srv-sub": "WHAT WE MAKE",
         "srv-title": "من الرسمة لحد ما الموقع يفتح.",
-        "srv-c1-h": "تصميم واجهات المواقع", "srv-c1-p": "كل شاشة ليها سبب. الشكل يتظبط على الموبايل قبل ما يتظبط على الشاشة الكبيرة.",
-        "srv-c2-h": "فرونت إند", "srv-c2-p": "نبني الواجهة نفسها: صفحات سريعة، واضحة، ومن غير تعقيد.",
-        "srv-c3-h": "صفحات بتخلّص القرار", "srv-c3-p": "صفحة هبوط أو موقع كامل يخلّي الزبون يفهم ويعمل الخطوة الجاية.",
-        "srv-c4-h": "اتجاه بصري للموقع", "srv-c4-p": "ألوان وخط يمشوا مع الصفحات. لو الهوية لسه مش متظبطة، نشتغل على اللي يظهر في الموقع.",
         "price-sub": "ENGAGEMENTS", "price-title": "اختار حجم البداية.",
         "price-p1": "الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.",
         "price-p2": "الاسعار بتتحدد في البرايفيت حسب شغلك انت , مفيش سعر ثابت انت اللي بتحدد اللي يعجبك من البدايه",
@@ -77,20 +68,11 @@ const translations = {
         "hero-p2": "FIKRA is the bridge that gets you closer to your customer's mindset.", 
         "hero-p": "Web Design & Front-End. We design and build: clean, fast, mobile-first pages that your customers understand instantly.",
         "hero-btn1": "Start Your Idea", "hero-btn2": "See Our Style",
-        "ticker-1": "Mobile First", "ticker-2": "UI / UX", "ticker-3": "Idea to Page", "ticker-4": "FIKRA", "ticker-5": "Web Design", "ticker-6": "Front End", "ticker-7": "Landing Pages",
         "port-sub": "SELECTED DIRECTIONS",
         "port-title": "Our Style, No Fake Logos.",
         "port-p": "Website UI concepts. Not apps, and no borrowed client logos. When we work on your idea, it's under your name.",
         "feat-title": "Why Choose FIKRA & Relax?", "feat-p": "We don't just do regular work; we build websites that live and grow your business.",
-        "feat-c1-h": "Fast Execution", "feat-c1-p": "Your time is money. We deliver on time, no excuses.",
-        "feat-c2-h": "Outstanding Quality", "feat-c2-p": "We only deliver when we are 100% satisfied. Clean code and unique design.",
-        "feat-c3-h": "We Are Your Partners", "feat-c3-p": "Your success is ours. We brainstorm with you and give you market insights.",
-        "feat-c4-h": "Continuous Support", "feat-c4-p": "Available 24/7. We solve any concerns instantly before handover to prevent delays.",
         "srv-sub": "WHAT WE MAKE", "srv-title": "From Sketch to Launch.",
-        "srv-c1-h": "Web UI Design", "srv-c1-p": "Every screen has a purpose. Designed for mobile first, then scaled up.",
-        "srv-c2-h": "Front-End", "srv-c2-p": "Building the UI: Fast, clear, and straightforward pages.",
-        "srv-c3-h": "Decision-Making Pages", "srv-c3-p": "Landing pages or full sites that guide the customer to the next step.",
-        "srv-c4-h": "Visual Direction", "srv-c4-p": "Colors and typography that match. We establish your visual presence.",
         "price-sub": "ENGAGEMENTS", "price-title": "Choose Your Scale.",
         "price-p1": "Currently taking freelance projects. Packages are for scale reference, pricing is custom after hearing your idea.",
         "price-p2": "Prices are discussed privately. There's no fixed price; you decide what suits you from the start.",
@@ -134,7 +116,34 @@ const translations = {
     }
 };
 
+window.translations = JSON.parse(JSON.stringify(defaultTranslations)); // Copy
 let currentLang = "ar";
+
+function applyFirebaseTranslations() {
+    if(window.siteData && window.siteData.siteTexts) {
+        for(const key in window.siteData.siteTexts) {
+            const data = window.siteData.siteTexts[key];
+            if(data.ar) window.translations.ar[key] = data.ar;
+            if(data.en) window.translations.en[key] = data.en;
+        }
+    }
+    
+    // Apply Original Projects text overrides if any
+    if(window.siteData && window.siteData.origProjects) {
+        for(let i=1; i<=5; i++) {
+            let pKey = "project"+i;
+            if(window.siteData.origProjects[pKey]) {
+                const ov = window.siteData.origProjects[pKey];
+                if(ov.arTitle) window.translations.ar[`port-c${i}-h`] = ov.arTitle;
+                if(ov.enTitle) window.translations.en[`port-c${i}-h`] = ov.enTitle;
+                if(ov.arDesc) window.translations.ar[`modal-${i}-title`] = ov.arTitle;
+                if(ov.enDesc) window.translations.en[`modal-${i}-title`] = ov.enTitle;
+                if(ov.arDesc) window.translations.ar[`modal-${i}-desc`] = ov.arDesc;
+                if(ov.enDesc) window.translations.en[`modal-${i}-desc`] = ov.enDesc;
+            }
+        }
+    }
+}
 
 function toggleLanguage() {
     currentLang = currentLang === "ar" ? "en" : "ar";
@@ -143,33 +152,39 @@ function toggleLanguage() {
     
     document.getElementById('lang-toggle').innerText = currentLang === "ar" ? "EN" : "عربي";
 
+    applyFirebaseTranslations();
+
     document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
-        if (translations[currentLang][key]) {
-            el.innerHTML = translations[currentLang][key]; 
+        if (window.translations[currentLang][key]) {
+            el.innerHTML = window.translations[currentLang][key]; 
         }
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
-        if (translations[currentLang][key]) {
-            el.placeholder = translations[currentLang][key];
+        if (window.translations[currentLang][key]) {
+            el.placeholder = window.translations[currentLang][key];
         }
     });
 
-    // تحديث العناصر الديناميكية اللي انضافت من الادمن
     document.querySelectorAll('.dynamic-lang').forEach(el => {
         const text = el.getAttribute(`data-${currentLang}`);
         if(text) el.innerHTML = text;
     });
 
+    // إعادة رسم التيكر باللغة الجديدة
+    if(typeof window.renderTicker === 'function') {
+        window.renderTicker();
+    }
+
     const adminLoginBtn = document.getElementById("adminLoginBtn");
     if(adminLoginBtn && adminLoginBtn.innerText !== "جاري الدخول...") {
-        adminLoginBtn.innerText = translations[currentLang]["admin-login-text"];
+        adminLoginBtn.innerText = window.translations[currentLang]["admin-login-text"];
     }
     const adminLogoutBtn = document.getElementById("adminLogoutBtn");
     if(adminLogoutBtn) {
-        adminLogoutBtn.innerText = translations[currentLang]["admin-logout-text"];
+        adminLogoutBtn.innerText = window.translations[currentLang]["admin-logout-text"];
     }
 
     let nameInput = document.getElementById('userName').value;
@@ -180,6 +195,15 @@ function toggleLanguage() {
     if (document.getElementById('result-view').style.display === 'block') {
         generateBrief(); 
     }
+}
+
+window.reRenderTexts = function() {
+    // Called after admin saves new text
+    applyFirebaseTranslations();
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (window.translations[currentLang][key]) el.innerHTML = window.translations[currentLang][key]; 
+    });
 }
 
 function toggleMobileMenu() {
@@ -217,9 +241,15 @@ function openModal(titleKey, descKey, linkUrl, projectKey) {
     if (window.siteData && window.siteData.projectUrls && projectKey) {
         targetLink = window.siteData.projectUrls[projectKey] || linkUrl;
     }
+    
+    // إذا كان المشروع ضمن origProjects ومعدل
+    if(window.siteData && window.siteData.origProjects && projectKey) {
+        let op = window.siteData.origProjects[projectKey];
+        if(op && op.url) targetLink = op.url;
+    }
 
-    document.getElementById('modalTitle').innerHTML = translations[currentLang][titleKey] || titleKey;
-    document.getElementById('modalDesc').innerHTML = translations[currentLang][descKey] || descKey;
+    document.getElementById('modalTitle').innerHTML = window.translations[currentLang][titleKey] || titleKey;
+    document.getElementById('modalDesc').innerHTML = window.translations[currentLang][descKey] || descKey;
     
     if(document.getElementById('modalLink')) {
         document.getElementById('modalLink').href = targetLink || '#';
@@ -230,7 +260,7 @@ function openModal(titleKey, descKey, linkUrl, projectKey) {
     const versionEl = document.getElementById('modalVersion');
     if (versionEl) {
         if (targetLink && targetLink.includes('personal-university')) {
-            versionEl.innerHTML = translations[currentLang]['modal-version'] || 'Version 1.2';
+            versionEl.innerHTML = window.translations[currentLang]['modal-version'] || 'Version 1.2';
             versionEl.style.display = 'block';
         } else {
             versionEl.innerHTML = '';
@@ -246,8 +276,8 @@ function closeModal() {
 }
 
 function openPricingModal(titleKey, descKey) {
-    document.getElementById('pricingModalTitle').innerHTML = translations[currentLang][titleKey] || titleKey;
-    document.getElementById('pricingModalDesc').innerHTML = translations[currentLang][descKey] || descKey;
+    document.getElementById('pricingModalTitle').innerHTML = window.translations[currentLang][titleKey] || titleKey;
+    document.getElementById('pricingModalDesc').innerHTML = window.translations[currentLang][descKey] || descKey;
     document.getElementById('pricingModal').style.display = 'flex';
 }
 
@@ -299,7 +329,6 @@ function copyBrief() {
     });
 }
 
-// كود الحركة السرية للـ Admin (6 كليكات)
 let secretClickCount = 0;
 let secretClickTimer;
 
@@ -321,6 +350,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    
+    // Initial lang set
+    applyFirebaseTranslations();
 });
 
 function openAdminModal() {
