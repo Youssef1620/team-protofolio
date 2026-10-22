@@ -17,8 +17,16 @@ const defaultTranslations = {
         "port-c5-h": "لوحة تحكم (Dashboard)", "port-c5-p": "صفحة تحكم ستاتيكية لعرض البيانات بوضوح.",
         "feat-title": "ليه تختار فكرة وتكبر دماغك؟",
         "feat-p": "إحنا مش بنعمل أي شغل وخلاص، إحنا بنعمل مواقع تعيش معاك وتكبر البزنس بتاعك.",
+        "feat-c1-h": "سرعة في الإنجاز", "feat-c1-p": "وقتك بفلوس، وإحنا بنقدر ده جداً. شغلنا بيخلص في ميعاده ومفيش حاجة اسمها بكرة.",
+        "feat-c2-h": "جودة بتنطق", "feat-c2-p": "مش بنسلمك مشروع إلا لو إحنا راضيين عنه 100%، الكود نظيف والتصميم مفيش زيه.",
+        "feat-c3-h": "إحنا شركائك", "feat-c3-p": "نجاح موقعك هو نجاحنا، بنفكر معاك وبنديك الخلاصة من خبرتنا في السوق.",
+        "feat-c4-h": "التواصل معاك مستمر", "feat-c4-p": "معاك على مدار الساعة.. لو قلقان من حاجة إحنا بنحلهالك في ساعتها قبل ما تستلم المشروع بتاعك منعا للتأجيلات وتاخير الفكره.",
         "srv-sub": "WHAT WE MAKE",
         "srv-title": "من الرسمة لحد ما الموقع يفتح.",
+        "srv-c1-h": "تصميم واجهات المواقع", "srv-c1-p": "كل شاشة ليها سبب. الشكل يتظبط على الموبايل قبل ما يتظبط على الشاشة الكبيرة.",
+        "srv-c2-h": "فرونت إند", "srv-c2-p": "نبني الواجهة نفسها: صفحات سريعة، واضحة، ومن غير تعقيد.",
+        "srv-c3-h": "صفحات بتخلّص القرار", "srv-c3-p": "صفحة هبوط أو موقع كامل يخلّي الزبون يفهم ويعمل الخطوة الجاية.",
+        "srv-c4-h": "اتجاه بصري للموقع", "srv-c4-p": "ألوان وخط يمشوا مع الصفحات. لو الهوية لسه مش متظبطة، نشتغل على اللي يظهر في الموقع.",
         "price-sub": "ENGAGEMENTS", "price-title": "اختار حجم البداية.",
         "price-p1": "الشغل الحالي فريلانس على المواقع. الباقات سميناها كمرجع للحجم، مش هنشتغل بيها كسيستم دلوقتي. السعر بعد ما نسمع الفكرة.",
         "price-p2": "الاسعار بتتحدد في البرايفيت حسب شغلك انت , مفيش سعر ثابت انت اللي بتحدد اللي يعجبك من البدايه",
@@ -53,7 +61,7 @@ const defaultTranslations = {
         "modal-2-title": "منصة الكورسات الأونلاين", "modal-2-desc": "شغلنا المنصة دي عشان الطالب يركز في المذاكرة وبس، الواجهة نظيفة ومفيهاش أي دوشة.",
         "modal-3-title": "متجر إلكتروني متكامل", "modal-3-desc": "المتجر ده مبني عشان يبيع. من أول لاندينج بيج لحد زرار الدفع، كل حاجة متظبطة بالملي.",
         "modal-4-title": "بورتفوليو شركات", "modal-4-desc": "واجهة بتعبر عن كيان الشركة، بتدي انطباع بالثقة والاحترافية من أول سكرول.",
-        "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.<br><br><strong>تحديث 1.2:</strong><br>• تم تعديل بعض النصوص الغير مطابقة للغة المستخدمة في الواجهة<br>• تم تحسين الـ AI وتطويره وتحسين جودة المايك بشكل ملحوظ ومدته في السماع<br>• هناك تحسينات أخرى ملحوظة عن التحديث رقم 1.1<br>• <em>(ملحوظة)</em> يجب استخراج API من Google Studio لاستخدام الـ AI",
+        "modal-5-title": "لوحة تحكم (Dashboard)", "modal-5-desc": "تصميم لوحة تحكم ستاتيكية نظيفة ومرتبة لتسهيل قراءة البيانات والإحصائيات، مناسبة للمنصات والمواقع اللي بتحتاج متابعة مستمرة.",
         "modal-link-btn": "رابط المشروع مباشرة",
         "modal-version": "الإصدار 1.2",
         "admin-login-text": "تسجيل الدخول",
@@ -71,8 +79,21 @@ const defaultTranslations = {
         "port-sub": "SELECTED DIRECTIONS",
         "port-title": "Our Style, No Fake Logos.",
         "port-p": "Website UI concepts. Not apps, and no borrowed client logos. When we work on your idea, it's under your name.",
+        "port-c1-h": "Fast Food & Delivery", "port-c1-p": "UI/UX that goes straight to the point.",
+        "port-c2-h": "E-Learning Platform", "port-c2-p": "Clean design for better focus.",
+        "port-c3-h": "E-Commerce", "port-c3-p": "Fast and uncomplicated purchasing journey.",
+        "port-c4-h": "Corporate Website", "port-c4-p": "Complete visual identity on the web.",
+        "port-c5-h": "Dashboard", "port-c5-p": "Static control page for clear data presentation.",
         "feat-title": "Why Choose FIKRA & Relax?", "feat-p": "We don't just do regular work; we build websites that live and grow your business.",
+        "feat-c1-h": "Fast Execution", "feat-c1-p": "Your time is money. We deliver on time, no excuses.",
+        "feat-c2-h": "Outstanding Quality", "feat-c2-p": "We only deliver when we are 100% satisfied. Clean code and unique design.",
+        "feat-c3-h": "We Are Your Partners", "feat-c3-p": "Your success is ours. We brainstorm with you and give you market insights.",
+        "feat-c4-h": "Continuous Support", "feat-c4-p": "Available 24/7. We solve any concerns instantly before handover to prevent delays.",
         "srv-sub": "WHAT WE MAKE", "srv-title": "From Sketch to Launch.",
+        "srv-c1-h": "Web UI Design", "srv-c1-p": "Every screen has a purpose. Designed for mobile first, then scaled up.",
+        "srv-c2-h": "Front-End", "srv-c2-p": "Building the UI: Fast, clear, and straightforward pages.",
+        "srv-c3-h": "Decision-Making Pages", "srv-c3-p": "Landing pages or full sites that guide the customer to the next step.",
+        "srv-c4-h": "Visual Direction", "srv-c4-p": "Colors and typography that match. We establish your visual presence.",
         "price-sub": "ENGAGEMENTS", "price-title": "Choose Your Scale.",
         "price-p1": "Currently taking freelance projects. Packages are for scale reference, pricing is custom after hearing your idea.",
         "price-p2": "Prices are discussed privately. There's no fixed price; you decide what suits you from the start.",
@@ -107,7 +128,7 @@ const defaultTranslations = {
         "modal-2-title": "E-Learning Platform", "modal-2-desc": "We built this platform so students can focus only on studying. Clean UI with zero noise.",
         "modal-3-title": "Full E-Commerce Store", "modal-3-desc": "This store is built to sell. From the landing page to the checkout button, everything is pixel-perfect.",
         "modal-4-title": "Corporate Portfolio", "modal-4-desc": "A UI that expresses the company's entity, giving an impression of trust and professionalism from the first scroll.",
-        "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read, suitable for platforms requiring continuous monitoring.<br><br><strong>Update 1.2:</strong><br>• Fixed some texts that didn't match the language used in the interface<br>• Improved the AI, developed it, and significantly enhanced the microphone quality and listening duration<br>• There are other notable improvements over update 1.1<br>• <em>(Note)</em> You must extract the API from Google Studio to use the AI",
+        "modal-5-title": "Static Dashboard", "modal-5-desc": "Clean and organized static dashboard design to make data and stats easy to read.",
         "modal-link-btn": "Live Project Demo",
         "modal-version": "Version 1.2",
         "admin-login-text": "Login",
@@ -116,10 +137,11 @@ const defaultTranslations = {
     }
 };
 
-window.translations = JSON.parse(JSON.stringify(defaultTranslations)); // Copy
+window.translations = JSON.parse(JSON.stringify(defaultTranslations)); 
 let currentLang = "ar";
 
 function applyFirebaseTranslations() {
+    // 1. Site Texts
     if(window.siteData && window.siteData.siteTexts) {
         for(const key in window.siteData.siteTexts) {
             const data = window.siteData.siteTexts[key];
@@ -128,18 +150,44 @@ function applyFirebaseTranslations() {
         }
     }
     
-    // Apply Original Projects text overrides if any
+    // 2. Orig Projects overrides
     if(window.siteData && window.siteData.origProjects) {
         for(let i=1; i<=5; i++) {
             let pKey = "project"+i;
             if(window.siteData.origProjects[pKey]) {
                 const ov = window.siteData.origProjects[pKey];
-                if(ov.arTitle) window.translations.ar[`port-c${i}-h`] = ov.arTitle;
-                if(ov.enTitle) window.translations.en[`port-c${i}-h`] = ov.enTitle;
-                if(ov.arDesc) window.translations.ar[`modal-${i}-title`] = ov.arTitle;
-                if(ov.enDesc) window.translations.en[`modal-${i}-title`] = ov.enTitle;
+                if(ov.arTitle) { window.translations.ar[`port-c${i}-h`] = ov.arTitle; window.translations.ar[`modal-${i}-title`] = ov.arTitle; }
+                if(ov.enTitle) { window.translations.en[`port-c${i}-h`] = ov.enTitle; window.translations.en[`modal-${i}-title`] = ov.enTitle; }
                 if(ov.arDesc) window.translations.ar[`modal-${i}-desc`] = ov.arDesc;
                 if(ov.enDesc) window.translations.en[`modal-${i}-desc`] = ov.enDesc;
+            }
+        }
+    }
+
+    // 3. Orig Features overrides
+    if(window.siteData && window.siteData.origFeatures) {
+        for(let i=1; i<=4; i++) {
+            let fKey = "feat"+i;
+            if(window.siteData.origFeatures[fKey]) {
+                const ov = window.siteData.origFeatures[fKey];
+                if(ov.arTitle) window.translations.ar[`feat-c${i}-h`] = ov.arTitle;
+                if(ov.enTitle) window.translations.en[`feat-c${i}-h`] = ov.enTitle;
+                if(ov.arDesc) window.translations.ar[`feat-c${i}-p`] = ov.arDesc;
+                if(ov.enDesc) window.translations.en[`feat-c${i}-p`] = ov.enDesc;
+            }
+        }
+    }
+
+    // 4. Orig Services overrides
+    if(window.siteData && window.siteData.origServices) {
+        for(let i=1; i<=4; i++) {
+            let sKey = "srv"+i;
+            if(window.siteData.origServices[sKey]) {
+                const ov = window.siteData.origServices[sKey];
+                if(ov.arTitle) window.translations.ar[`srv-c${i}-h`] = ov.arTitle;
+                if(ov.enTitle) window.translations.en[`srv-c${i}-h`] = ov.enTitle;
+                if(ov.arDesc) window.translations.ar[`srv-c${i}-p`] = ov.arDesc;
+                if(ov.enDesc) window.translations.en[`srv-c${i}-p`] = ov.enDesc;
             }
         }
     }
@@ -173,10 +221,7 @@ function toggleLanguage() {
         if(text) el.innerHTML = text;
     });
 
-    // إعادة رسم التيكر باللغة الجديدة
-    if(typeof window.renderTicker === 'function') {
-        window.renderTicker();
-    }
+    if(typeof window.renderTicker === 'function') window.renderTicker();
 
     const adminLoginBtn = document.getElementById("adminLoginBtn");
     if(adminLoginBtn && adminLoginBtn.innerText !== "جاري الدخول...") {
@@ -198,7 +243,6 @@ function toggleLanguage() {
 }
 
 window.reRenderTexts = function() {
-    // Called after admin saves new text
     applyFirebaseTranslations();
     document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
@@ -242,7 +286,6 @@ function openModal(titleKey, descKey, linkUrl, projectKey) {
         targetLink = window.siteData.projectUrls[projectKey] || linkUrl;
     }
     
-    // إذا كان المشروع ضمن origProjects ومعدل
     if(window.siteData && window.siteData.origProjects && projectKey) {
         let op = window.siteData.origProjects[projectKey];
         if(op && op.url) targetLink = op.url;
@@ -350,8 +393,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    
-    // Initial lang set
     applyFirebaseTranslations();
 });
 
